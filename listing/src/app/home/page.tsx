@@ -78,9 +78,6 @@ const MyComponent: React.FC = () => {
             </Button>
           </form>
         </div>
-        <Button className="box-border flex relative flex-col shrink-0 self-center p-3 mt-5 w-12 h-12 text-center bg-white bg-center bg-no-repeat bg-cover appearance-none cursor-pointer bg-[url(https://cdn.builder.io/api/v1/image/assets%2F481ecd094abe46c49a3ee5256ef72179%2F26a13528ea844d8dbd4ab0a237e7c0b9)] grow-0 rounded-[104px] text-[white] max-md:mt-auto max-sm:mt-auto">
-          <span className="sr-only">Scroll down</span>
-        </Button>
       </section>
     </div>
   );
