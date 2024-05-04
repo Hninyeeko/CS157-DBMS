@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -28,6 +29,8 @@ const Button: React.FC<ButtonProps> = ({
 );
 
 const MyComponent: React.FC = () => {
+  const router = useRouter();
+  const handleCreateNewList = () => {router.push("/createNewList");}
   const [searchTerm, setSearchTerm] = React.useState("");
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +55,8 @@ const MyComponent: React.FC = () => {
             </p>
           </div>
           <div className="flex flex-row gap-4 self-center mx-auto mt-9 w-full max-w-[444px] max-md:justify-center max-md:items-center max-md:self-stretch max-md:mx-auto max-md:w-full">
-            <Button className="box-border relative grow shrink-0 p-6 my-auto w-auto text-center text-black bg-white rounded border border-white border-solid appearance-none cursor-pointer">
+            <Button className="box-border relative grow shrink-0 p-6 my-auto w-auto text-center text-black bg-white rounded border border-white border-solid appearance-none cursor-pointer"
+              onClick={handleCreateNewList}>
               Create New List
             </Button>
             <Button className="box-border relative grow shrink-0 p-6 m-auto w-auto text-center rounded border-2 border-solid appearance-none cursor-pointer bg-black bg-opacity-40 border-[black] text-[white]">
