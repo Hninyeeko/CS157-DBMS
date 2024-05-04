@@ -4,20 +4,18 @@ import * as React from "react";
 import Image from "next/image";
 
 interface ListFormProps {
-  onSubmit: (itemName: string, shop: string, quantity: string) => void;
+  onSubmit: (itemName: string, quantity: string) => void;
   onCancel: () => void;
 }
 
 const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
   const [itemName, setItemName] = React.useState("");
-  const [shop, setShop] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(itemName, shop, quantity);
+    onSubmit(itemName, quantity);
     setItemName("");
-    setShop("");
     setQuantity("");
   };
 
@@ -34,16 +32,6 @@ const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
         placeholder="Item Name"
         value={itemName}
         onChange={(e) => setItemName(e.target.value)}
-        className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
-      />
-      <label htmlFor="shop" className="sr-only">
-        Shop
-      </label>
-      <textarea
-        id="shop"
-        placeholder="Shop"
-        value={shop}
-        onChange={(e) => setShop(e.target.value)}
         className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
       />
       <label htmlFor="quantity" className="sr-only">
@@ -77,9 +65,8 @@ const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
 };
 
 export default function App() {
-  const handleSubmit = (itemName: string, shop: string, quantity: string) => {
+  const handleSubmit = (itemName: string, quantity: string) => {
     console.log("Item Name:", itemName);
-    console.log("Shop:", shop);
     console.log("Quantity:", quantity);
     // Handle form submission logic here
   };
