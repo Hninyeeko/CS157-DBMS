@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@builder.io/react": "^3.2.6",
     "bootstrap": "^5.3.3",
     "mdb-react-ui-kit": "^8.0.0"
   },
@@ -7,7 +8,6 @@
   "version": "1.0.0",
   "description": "CS 157A - Intro to Database Management",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
