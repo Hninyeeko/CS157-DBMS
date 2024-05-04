@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react";
-import Image from "next/image";
+import { useRouter} from "next/navigation"
 
 interface ListFormProps {
   onSubmit: (listName: string, shop: string, notes: string) => void;
@@ -78,6 +78,7 @@ const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
 };
 
 export default function App() {
+  const router = useRouter();
   const handleSubmit = (listName: string, shop: string, notes: string) => {
     console.log("List Name:", listName);
     console.log("Shop:", shop);
@@ -88,6 +89,8 @@ export default function App() {
   const handleCancel = () => {
     console.log("Form cancelled");
     // Handle cancel logic here
+    router.push("/home");
+    
   };
 
   return (
