@@ -1,96 +1,83 @@
 "use client"
 
 import * as React from "react";
+import Image from "next/image";
 
-interface ButtonProps {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset";
+interface ListFormProps {
+  onSubmit: (listName: string, notes: string) => void;
+  onCancel: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  children,
-  className,
-  onClick,
-  type = "button",
-}) => (
-  <button type={type} className={className} onClick={onClick}>
-    {children}
-  </button>
-);
+const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
+  const [listName, setListName] = React.useState("");
+  const [notes, setNotes] = React.useState("");
 
-const MyComponent: React.FC = () => {
-  const [searchTerm, setSearchTerm] = React.useState("");
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log("Searching for:", searchTerm);
-  };
-
-  const handleCreateNewList = () => {
-    console.log("Creating new list");
-  };
-
-  const handleViewLists = () => {
-    console.log("Viewing lists");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit(listName, notes);
+    setListName("");
+    setNotes("");
   };
 
   return (
-    <div className="box-border flex relative flex-col shrink-0 self-stretch px-5 h-screen bg-[#ADD8E6] bg-center bg-no-repeat bg-cover grow-0 max-md:h-screen max-md:grow-0">
-      <section className="box-border flex relative flex-col grow shrink-0 self-stretch px-5 mx-auto w-full h-screen bg-[#ADD8E6] bg-center bg-no-repeat bg-cover max-w-[1440px] max-md:h-screen max-md:grow-0">
-        <div className="flex flex-col justify-start px-3 mx-auto mt-auto mb-16 w-full grow-0 z-[999] max-md:flex max-md:flex-col max-md:items-center max-md:m-auto max-md:h-auto max-md:grow-0 max-sm:flex max-sm:flex-col max-sm:mx-auto max-sm:mt-auto">
-          <div className="flex flex-col justify-start items-start self-stretch w-full max-w-full">
-            <h1 className="self-stretch mx-auto w-auto max-w-full text-xl font-bold tracking-normal text-center text-white leading-[120%] max-md:self-stretch max-md:w-auto max-md:text-6xl max-md:text-center max-sm:text-6xl max-sm:leading-[100%]">
-              Hello!
-            </h1>
-            <p className="self-stretch mt-2 w-full max-w-full text-2xl font-light tracking-normal text-center text-white max-md:text-center max-sm:text-base max-sm:tracking-wider">
-              You can create a new list or search for your exsiting lists.
-            </p>
-          </div>
-          <div className="flex flex-row gap-4 self-center mx-auto mt-9 w-full max-w-[444px] max-md:justify-center max-md:items-center max-md:self-stretch max-md:mx-auto max-md:w-full">
-            <Button
-              className="box-border relative grow shrink-0 p-6 my-auto w-auto text-center text-black bg-white rounded border border-white border-solid appearance-none cursor-pointer"
-              onClick={handleCreateNewList}
-            >
-              Create New List
-            </Button>
-            <Button
-              className="box-border relative grow shrink-0 p-6 m-auto w-auto text-center rounded border-2 border-solid appearance-none cursor-pointer bg-black bg-opacity-40 border-[black] text-[white]"
-              onClick={handleViewLists}
-            >
-              View Lists
-            </Button>
-          </div>
-          <form
-            onSubmit={handleSearchSubmit}
-            className="flex flex-row gap-2 self-center mx-auto mt-4 w-full max-w-[444px]"
-          >
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="Search..."
-              className="flex-grow px-4 py-2 text-white bg-black bg-opacity-40 rounded border border-white focus:outline-none focus:ring-2 focus:ring-white"
-            />
-            <Button
-              type="submit"
-              className="px-4 py-2 text-white bg-black bg-opacity-60 rounded border border-white hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-white"
-            >
-              Search
-            </Button>
-          </form>
-        </div>
-        <Button className="box-border flex relative flex-col shrink-0 self-center p-3 mt-5 w-12 h-12 text-center bg-white bg-center bg-no-repeat bg-cover appearance-none cursor-pointer bg-[url(https://cdn.builder.io/api/v1/image/assets%2F481ecd094abe46c49a3ee5256ef72179%2F26a13528ea844d8dbd4ab0a237e7c0b9)] grow-0 rounded-[104px] text-[white] max-md:mt-auto max-sm:mt-auto">
-          <span className="sr-only">Scroll down</span>
-        </Button>
-      </section>
-    </div>
+    <form onSubmit={handleSubmit} className="flex flex-col items-center">
+      <h1>CREATE NEW LIST</h1>
+      <label htmlFor="listName" className="sr-only">
+        List Name
+      </label>
+      <input
+        type="text"
+        id="listName"
+        placeholder="List Name"
+        value={listName}
+        onChange={(e) => setListName(e.target.value)}
+        className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
+        required
+      />
+      <label htmlFor="notes" className="sr-only">
+        Notes
+      </label>
+      <textarea
+        id="notes"
+        placeholder="Notes"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        className="p-2.5 mb-5 w-4/5 border border-t border-r border-b border-l border-solid border-stone-300 h-[100px]"
+      />
+      <div className="flex justify-between w-4/5">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="w-[48%] h-10 cursor-pointer bg-gray-300 text-black border-none"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white"
+        >
+          Create List
+        </button>
+      </div>
+    </form>
   );
 };
 
-export default MyComponent;
+export default function App() {
+  const handleSubmit = (listName: string, notes: string) => {
+    console.log("List Name:", listName);
+    console.log("Notes:", notes);
+    // Handle form submission logic here
+  };
+
+  const handleCancel = () => {
+    console.log("Form cancelled");
+    // Handle cancel logic here
+  };
+
+  return (
+    <main>
+      <ListForm onSubmit={handleSubmit} onCancel={handleCancel} />
+    </main>
+  );
+}
