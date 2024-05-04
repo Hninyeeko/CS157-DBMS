@@ -57,14 +57,20 @@ async function executeSqlFile(filePath) {
       // Read the SQL file
       const sql = await fs.readFile(filePath, 'utf-8');
 
-      // Execute the SQL commands
-      const [results] = await connection.query(sql);
+      // Split the SQL string into individual commands
+      const commands = sql.split(';');
+
+      // Execute each command
+      for (const command of commands) {
+          if (command.trim() === '') continue; // Skip empty commands
+          await connection.query(command);
+      }
 
       console.log('SQL file executed successfully.');
   } catch (error) {
       console.error(`Error executing SQL file: `, error);
   } finally {
-      // Close the database connection
+      // Close database connection
       await connection.end();
   }
 }
