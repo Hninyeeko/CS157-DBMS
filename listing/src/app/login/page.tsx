@@ -36,7 +36,6 @@ export default  function Home() {
       })
       .catch((error) => {
         // Handle any errors
-        setLoginStatus("error")
         console.error(error);
       });
   }, []);

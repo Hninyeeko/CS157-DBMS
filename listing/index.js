@@ -95,6 +95,14 @@ app.get('/some-page', (req, res) => {
       console.log('User is not logged in');
     }
   });
+
+
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    storedUser = null;
+    res.send({ message: 'User logged out' });
+  });
+
 app.listen(3001, () => {
     console.log('Server is running on port 3001');
 });
