@@ -1,26 +1,17 @@
-<<<<<<< Updated upstream
 import Image from "next/image";
 import {connect} from "./database/page";
 import {selectAllStudents} from "./database/page";
-=======
 "use client";
 import React, {useState, useEffect} from "react";
 import Axios from "axios";
 
->>>>>>> Stashed changes
 
-let connection1 = connect();
-selectAllStudents();
-
-export default async function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <p> hello world!</p>
-    </main>
-  );
+interface FormTextAreaProps {
+  placeholder: string;
+  name: string;
+  className?: string;
+  required?: boolean;
 }
-<<<<<<< Updated upstream
-=======
 
 const FormTextArea: React.FC<FormTextAreaProps> = ({
   placeholder,
@@ -111,4 +102,3 @@ const MyComponent: React.FC = () => {
 };
 
 export default MyComponent;
->>>>>>> Stashed changes
