@@ -31,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
 const MyComponent: React.FC = () => {
   const router = useRouter();
   const handleCreateNewList = () => {router.push("/createNewList");}
+  const handleViewLists = () => {router.push("/viewLists");}
   const [searchTerm, setSearchTerm] = React.useState("");
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +60,8 @@ const MyComponent: React.FC = () => {
               onClick={handleCreateNewList}>
               Create New List
             </Button>
-            <Button className="box-border relative grow shrink-0 p-6 m-auto w-auto text-center rounded border-2 border-solid appearance-none cursor-pointer bg-black bg-opacity-40 border-[black] text-[white]">
+            <Button className="box-border relative grow shrink-0 p-6 m-auto w-auto text-center rounded border-2 border-solid appearance-none cursor-pointer bg-black bg-opacity-40 border-[black] text-[white]"
+              onClick={handleViewLists}>
               View Lists
             </Button>
           </div>
