@@ -13,7 +13,7 @@ export default  function Home() {
 
   const register = (e) => {
     e.preventDefault();
-    Axios.post("http://localhost:3001/login", {
+    Axios.post("http://localhost:3002/login", {
       username: username,
       password: password,
     }).then((response) => {

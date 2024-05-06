@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
+const mysqlReal = require('mysql2');
 const session = require('express-session');
 var storedUser = null;
 
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const con = mysql.createConnection({
+const con = mysqlReal.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -105,8 +106,8 @@ app.get('/logout', (req, res) => {
     res.send({ message: 'User logged out' });
   });
 
-app.listen(3001, () => {
-    console.log('Server is running on port 3001');
+app.listen(3002, () => {
+    console.log('Server is running on port 3002');
 });
 
 // this is still a work in progress

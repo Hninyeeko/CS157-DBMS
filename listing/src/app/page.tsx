@@ -43,7 +43,7 @@ const MyComponent: React.FC = () => {
   const [registerStatus, setRegisterStatus] = React.useState("");
   const [user, setUser] = useState(null);
   useEffect(() => {
-    fetch('http://localhost:3001/api/execute-sql')
+    fetch('http://localhost:3002/api/execute-sql')
       .then(response => response.json())
       .then(data => console.log(data.message))
       .catch(error => console.error('Error:', error));
@@ -51,7 +51,7 @@ const MyComponent: React.FC = () => {
 
   const register = (e) => {
     e.preventDefault();
-    Axios.post("http://localhost:3001/register", {
+    Axios.post("http://localhost:3002/register", {
       username: username,
       email: email,
       password: password,
