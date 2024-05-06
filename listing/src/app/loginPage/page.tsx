@@ -14,7 +14,7 @@ const FormInput: React.FC<FormInputProps> = ({ type, placeholder, name, classNam
 
 const MyComponent: React.FC = () => {
   return (
-    <div className="box-border relative overflow-hidden mt-5 w-full min-h-screen">
+    <div className="box-border relative overflow-hidden w-full min-h-screen">
       <img
         src="https://cdn.builder.io/api/v1/image/assets%2F25fd6ed351994175ac507a1dcdcba146%2F3cb9462f99064364b1c99132a8587f9c"
         alt=""
