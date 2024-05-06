@@ -1,24 +1,44 @@
 "use client"
 
 import * as React from "react";
-import { useRouter} from "next/navigation"
+import { useRouter } from "next/navigation"
 
-interface ListFormProps {
-  onSubmit: (listName: string, shop: string, notes: string) => void;
-  onCancel: () => void;
-}
+export default function createNewList(){
+  const router = useRouter();
 
-const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
-  const [listName, setListName] = React.useState("");
-  const [shop, setShop] = React.useState("");
-  const [notes, setNotes] = React.useState("");
+  const [listName, setListName] = React.useState("")
+  const [shop, setShop] = React.useState("")
+  const [notes, setNotes] = React.useState("")
+  const [isLoading, setIsLoading] = React.useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit(listName, shop, notes);
-    setListName("");
-    setShop("");
-    setNotes("");
+  const handleSubmit = async (e) => {
+    // Handle form submission logic here
+    e.preventDefault()
+    setIsLoading(true)
+
+    const list = {
+      listName, shop, notes
+    }
+
+    // Sending a Post request to add new list to DB
+    const res = await fetch('endpoints for the API to connect to mySQL here', {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(list)
+    })
+
+    //if resource is added, redirect user to viewLists page
+    if (res.status === 201){
+      router.refresh()
+      router.push('/viewLists')
+    }
+
+  }
+
+  const handleCancel = () => {
+    console.log("Form cancelled");
+    // Handle cancel logic here
+    router.push("/viewLists");
   };
 
   return (
@@ -60,42 +80,19 @@ const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
       />
       <div className="flex justify-between w-4/5">
         <button
-          type="button"
-          onClick={onCancel}
+          onClick={handleCancel}
           className="w-[48%] h-10 cursor-pointer bg-gray-300 text-black border-none"
         >
           Cancel
         </button>
         <button
-          type="submit"
-          className="w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white"
+          className="btn-primary w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white"
+          disabled={isLoading}
         >
-          Create List
+          {isLoading && <span>Creating list...</span>}
+          {!isLoading && <span>Create New List </span>}
         </button>
       </div>
     </form>
-  );
-};
-
-export default function App() {
-  const router = useRouter();
-  const handleSubmit = (listName: string, shop: string, notes: string) => {
-    console.log("List Name:", listName);
-    console.log("Shop:", shop);
-    console.log("Notes:", notes);
-    // Handle form submission logic here
-  };
-
-  const handleCancel = () => {
-    console.log("Form cancelled");
-    // Handle cancel logic here
-    router.push("/home");
-    
-  };
-
-  return (
-    <main>
-      <ListForm onSubmit={handleSubmit} onCancel={handleCancel} />
-    </main>
-  );
+  )
 }
