@@ -38,7 +38,7 @@ export default function createNewList(){
   const handleCancel = () => {
     console.log("Form cancelled");
     // Handle cancel logic here
-    router.push("/viewLists");
+    router.push("/home");
   };
 
   return (
