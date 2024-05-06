@@ -1,6 +1,8 @@
+
+const fs = require('fs').promises;
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const session = require('express-session');
 var storedUser = null;
 
@@ -106,3 +108,45 @@ app.get('/logout', (req, res) => {
 app.listen(3001, () => {
     console.log('Server is running on port 3001');
 });
+
+// this is still a work in progress
+async function executeSqlFile(filePath) {
+    // Create a connection to the database
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        port: 3307,
+    });
+  
+    try {
+        // Read the SQL file
+        const sql = await fs.readFile(filePath, 'utf-8');
+  
+        // Split the SQL string into individual commands
+        const commands = sql.split(';');
+  
+        // Execute each command
+        for (const command of commands) {
+            if (command.trim() === '') continue; // Skip empty commands
+            await connection.query(command);
+        }
+  
+        console.log('SQL file executed successfully.');
+    } catch (error) {
+        console.error(`Error executing SQL file: `, error);
+    } finally {
+        // Close database connection
+        await connection.end();
+    }
+  }
+  
+  app.get('/api/execute-sql', async (req, res) => {
+    try {
+      await executeSqlFile('.\\src\\dbsetup.sql');
+      res.json({ message: 'SQL file executed successfully' });
+    } catch (error) {
+      console.error('Failed to execute SQL file:', error);
+      res.status(500).json({ error: 'An error occurred while executing the SQL file' });
+    }
+  });

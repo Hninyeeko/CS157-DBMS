@@ -44,7 +44,7 @@ export async function selectAllStudents() {
 
 
 // this is still a work in progress
-async function executeSqlFile(filePath) {
+export async function executeSqlFile(filePath) {
   // Create a connection to the database
   const connection = await mysql.createConnection({
       host: 'localhost',
