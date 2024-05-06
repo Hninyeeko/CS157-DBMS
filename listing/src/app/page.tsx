@@ -1,7 +1,9 @@
+"use client";
 import Image from "next/image";
 import {connect} from "./database/page";
 import {selectAllStudents} from "./database/page";
-"use client";
+import { executeSqlFile } from './database/page';
+
 import React, {useState, useEffect} from "react";
 import Axios from "axios";
 
@@ -40,6 +42,12 @@ const MyComponent: React.FC = () => {
   const [password, setPassword] = React.useState("");
   const [registerStatus, setRegisterStatus] = React.useState("");
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    fetch('http://localhost:3001/api/execute-sql')
+      .then(response => response.json())
+      .then(data => console.log(data.message))
+      .catch(error => console.error('Error:', error));
+  }, []);
 
   const register = (e) => {
     e.preventDefault();
@@ -57,9 +65,7 @@ const MyComponent: React.FC = () => {
     )
   }
 
-
-
-
+ 
 
   return (
     <div
