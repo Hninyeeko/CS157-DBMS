@@ -36,6 +36,15 @@ Download Node.js from this link
 https://nodejs.org/en
 
 Download Xammp and set Port number of MySQL to 3307 in Config file
+Run Apache and MySQL in Xammp
+
+Dependencies:
+
+express: npm install express
+cors:  npm i cors express mysql nodemon
+concurrently: npm i --save-dev concurrently
+axios: npm install axios
+
 
 
 
