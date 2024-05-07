@@ -28,7 +28,7 @@ export default  function Home() {
     )
   }
   useEffect(() => {
-    Axios.get("http://localhost:3001/some-page")
+    Axios.get("http://localhost:3002/some-page")
       .then((response) => {
         // Handle the response data
         setLoginStatus(response.data.email)

@@ -100,7 +100,7 @@ export default function createNewList(){
       />
       <div className="flex justify-between w-4/5">
         <button
-          onClick={handleCancel}
+          onClick={createNewList}
           className="w-[48%] h-10 cursor-pointer bg-gray-300 text-black border-none"
         >
           Cancel
