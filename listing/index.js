@@ -196,3 +196,20 @@ async function executeSqlFile(filePath) {
       res.status(500).json({ error: 'An error occurred while executing the SQL file' });
     }
   });
+
+  app.get('/getShopList', async (req, res) => {
+    con.query('SELECT * FROM shops', (err, result) => {
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                const shopList = result;
+                console.log("Shop data:", shopList);
+                res.send(shopList);
+            }
+
+        }
+    });
+});
+
+
