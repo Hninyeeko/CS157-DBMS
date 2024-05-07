@@ -61,7 +61,7 @@ const addItem = (e) => {
     if(response.data.message) {
       console.log(response.data.message)
       router.refresh()
-      router.push('/addItem')
+      //router.push('/addItem')
     } else {
       console.log(response.data.email) 
     }

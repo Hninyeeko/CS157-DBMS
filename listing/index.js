@@ -65,8 +65,9 @@ app.post('/addItem', (req, res) =>{
 app.post('/addReview', (req, res) =>{
     const comment = req.body.comment;
     const stars = req.body.stars;
+    const shopID = req.body.shopID;
     console.log('add review function started');
-    con.query('INSERT INTO reviews (Comment, Stars, ShopID) VALUES (?,?)', [comment, stars, shopID], (err, result) =>{
+    con.query('INSERT INTO reviews (Comment, Stars, ShopID) VALUES (?,?,?)', [comment, stars, shopID], (err, result) =>{
         if(result){
             res.send(result);
         }
