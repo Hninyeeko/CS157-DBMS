@@ -6,18 +6,18 @@ import Axios from "axios";
 
 // Define the Shop interface
 interface Shop {
-  shopID: number;
-  name: string;
+  ShopName: string;
+  ShopID: string;
 }
 
 export default function addReview(){
   const router = useRouter();
 
   const [comment, setComment] = React.useState('')
-  const [stars, setStars] = React.useState('N/A') //dropdown
+  const [rating, setRating] = React.useState('N/A') //dropdown
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const [shopList, setShopList] = React.useState([]);
+  //const [shopList, setShopList] = React.useState([]);
   const [selectedShop, setSelectedShop] = useState('');
   const [shops, setShops] = useState<Shop[]>([]);
 
@@ -27,16 +27,13 @@ export default function addReview(){
       setIsLoading(true)
       Axios.post("http://localhost:3002/addReview", {
         comment: comment,
-        stars: stars,
-        shop: selectedShop,
+        rating: rating,
+        ShopID: selectedShop,
       }).then((response) => {
-        if(response.data.message) {
-          console.log(response.data.message)
+          console.log("addReview function executed")
           router.refresh()
           router.push('/viewShops')
-        } else {
-          console.log(response.data.email) 
-        }
+        
       }
       )
     }
@@ -45,7 +42,9 @@ export default function addReview(){
     useEffect(() => {
     const getShopList = async () => {
       try{
+        console.log("Frontend sending get request to API endpoint");
         const response = await Axios.get<Shop[]>("http://localhost:3002/getShopList");
+        console.log("Response from backend:", response.data);
         setShops(response.data);
       }catch (error) {
         console.error('Error fetching data', error);
@@ -53,7 +52,6 @@ export default function addReview(){
     };
 
     getShopList();
-
     }, []);
 
     //for dropdown list
@@ -75,13 +73,14 @@ export default function addReview(){
         <span>Shop</span>
         <select
         required
-        value={selectedShop} onChange={handleSelectChange}
-        className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
+        value={selectedShop} 
+        onChange={handleSelectChange}
+        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         >
           <option value="">Select a shop.</option>
           {shops.map((shop) => (
-            <option key={shop.shopID} value={shop.shopID}>
-              {shop.name}
+            <option key={shop.ShopID} value={shop.ShopID}>
+              {shop.ShopName}
            </option>
           ))}
         </select>
@@ -100,8 +99,8 @@ export default function addReview(){
       <label>
         <span>Stars</span>
         <select
-          onChange={(e) => setStars(e.target.value)}
-          value={stars}
+          onChange={(e) => setRating(e.target.value)}
+          value={rating}
           className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
         >
           <option value="N/A">N/A</option>

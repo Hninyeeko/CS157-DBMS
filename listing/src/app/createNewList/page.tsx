@@ -8,8 +8,7 @@ export default function createNewList(){
   const router = useRouter();
 
   const [listName, setListName] = React.useState("")
-  const [shop, setShop] = React.useState("")
-  const [notes, setNotes] = React.useState("")
+  const [shopID, setShopID] = React.useState("")
   const [isLoading, setIsLoading] = React.useState(false)
 
     // Sending a Post request to add new list to DB
@@ -19,8 +18,7 @@ export default function createNewList(){
       setIsLoading(true)
       Axios.post("http://localhost:3002/createNewList", {
         listName: listName,
-        shop: shop,
-        notes: notes,
+        shopID: shopID,
       }).then((response) => {
         if(response.data.message) {
           console.log(response.data.message)
@@ -57,26 +55,16 @@ export default function createNewList(){
         required
       />
       <label htmlFor="shop" className="sr-only">
-        Shop
+        Shop ID
       </label>
       <input
         required
         type="text"
-        id="shop"
-        placeholder="Shop"
-        value={shop}
-        onChange={(e) => setShop(e.target.value)}
+        id="shopID"
+        placeholder="ShopID"
+        value={shopID}
+        onChange={(e) => setShopID(e.target.value)}
         className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
-      />
-      <label htmlFor="notes" className="sr-only">
-        Notes
-      </label>
-      <textarea
-        id="notes"
-        placeholder="Notes"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        className="p-2.5 mb-5 w-4/5 border border-t border-r border-b border-l border-solid border-stone-300 h-[100px]"
       />
       <div className="flex justify-between w-4/5">
         <button

@@ -34,12 +34,12 @@ app.use(session({
 
 app.post('/createNewList', (req, res) =>{
     const listName = req.body.listName;
-    const shop = req.body.shop;
-    const notes = req.body.notes;
+    const shopID = req.body.shopID;
     console.log('new list function started');
-    con.query('INSERT INTO lists (`List Name`, Shop, Notes) VALUES (?,?,?)', [listName,shop, notes], (err, result) =>{
+    con.query('INSERT INTO List (ListName, ShopID) VALUES (?,?)', [listName,shopID], (err, result) =>{
         if(result){
             res.send(result);
+            console.log('result was sent from API to backend')
         }
         else{
             res.send({message: err});
@@ -52,7 +52,7 @@ app.post('/addItem', (req, res) =>{
     const quantity = req.body.quantity;
     const purchased = req.body.purchased;
     console.log('add item function started');
-    con.query('INSERT INTO items (`Item Name`, Quantity, purchased) VALUES (?,?,?)', [itemName,quantity, purchased], (err, result) =>{
+    con.query('INSERT INTO Item (ItemName, Quantity, Purchased) VALUES (?,?,?)', [itemName,quantity, purchased], (err, result) =>{
         if(result){
             res.send(result);
         }
@@ -64,10 +64,10 @@ app.post('/addItem', (req, res) =>{
 
 app.post('/addReview', (req, res) =>{
     const comment = req.body.comment;
-    const stars = req.body.stars;
+    const rating = req.body.rating;
     const shopID = req.body.shopID;
     console.log('add review function started');
-    con.query('INSERT INTO reviews (Comment, Stars, ShopID) VALUES (?,?,?)', [comment, stars, shopID], (err, result) =>{
+    con.query('INSERT INTO Review (Comment, Rating, ShopID) VALUES (?,?,?)', [comment, rating, shopID], (err, result) =>{
         if(result){
             res.send(result);
         }
@@ -83,7 +83,7 @@ app.post('/register', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    con.query('INSERT INTO users (email, username, password) VALUES (?, ?, ?)', [email, username, password], (err, result) => {
+    con.query('INSERT INTO User (Email, Username, Password) VALUES (?, ?, ?)', [email, username, password], (err, result) => {
         if(result) {
             res.send(result);
         }
@@ -97,7 +97,7 @@ app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
   
-    con.query('SELECT * FROM users where username =? and password =?', [username, password], (err, result) => {
+    con.query('SELECT * FROM User where Username =? and Password =?', [username, password], (err, result) => {
         if (err) {
             res.send({ err: err });
         } else {
@@ -198,13 +198,13 @@ async function executeSqlFile(filePath) {
   });
 
   app.get('/getShopList', async (req, res) => {
-    con.query('SELECT * FROM shops', (err, result) => {
+    con.query('SELECT ShopName, ShopID FROM Shop', (err, result) => {
         if (err) {
             res.send({ err: err });
         } else {
             if (result.length > 0) {
                 const shopList = result;
-                console.log("Shop data:", shopList);
+                console.log("Shop data from backend:", shopList);
                 res.send(shopList);
             }
 
