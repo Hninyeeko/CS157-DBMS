@@ -7,9 +7,9 @@ import Axios from "axios";
 export default function addReview(){
   const router = useRouter();
 
-  const [shopID, setShopID] = React.useState("") //dropdown
-  const [comment, setComment] = React.useState("")
-  const [stars, setStars] = React.useState("") //dropdown
+  const [shopID, setShopID] = React.useState('') //dropdown
+  const [comment, setComment] = React.useState('')
+  const [stars, setStars] = React.useState('N/A') //dropdown
   const [isLoading, setIsLoading] = React.useState(false)
 
     // Sending a Post request to add new review to DB
@@ -42,40 +42,44 @@ export default function addReview(){
   return (
     <form onSubmit={addReview} className="flex flex-col items-center">
       <h1>Add Review</h1>
-      <label htmlFor="notes" className="sr-only">
-        Shop ID
-      </label>
-      <textarea
+      <label>
+        <span>Shop ID</span>
+        <input
         required
-        id="shopID"
+        type="text"
         placeholder="Shop ID"
-        value={shopID}
         onChange={(e) => setShopID(e.target.value)}
-        className="p-2.5 mb-5 w-4/5 border border-t border-r border-b border-l border-solid border-stone-300 h-[100px]"
-      />
-      <label htmlFor="comment" className="sr-only">
-       Comment
-      </label>
-      <input
-        type="text"
-        id="comment"
-        placeholder="Start review"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
+        value={shopID}
         className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
       />
-      <label htmlFor="stars" className="sr-only">
-        Stars
       </label>
-      <input
+      <label> 
+        <span>Comment</span>
+        <input
         required
         type="text"
-        id="stars"
-        placeholder="1-5 stars"
-        value={stars}
-        onChange={(e) => setStars(e.target.value)}
+        placeholder="Start Review"
+        onChange={(e) => setComment(e.target.value)}
+        value={comment}
         className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
       />
+      </label>
+      <label>
+        <span>Stars</span>
+        <select
+          onChange={(e) => setStars(e.target.value)}
+          value={stars}
+          className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
+        >
+          <option value="N/A">N/A</option>
+          <option value="1">1 star</option>
+          <option value="2">2 stars</option>
+          <option value="3">3 stars</option>
+          <option value="4">4 stars</option>
+          <option value="5">5 stars</option>
+        </select>
+      </label>
+
       <div className="flex justify-between w-4/5">
         <button
           onClick={handleCancel}
