@@ -47,6 +47,35 @@ app.post('/createNewList', (req, res) =>{
     });
 });
 
+app.post('/addItem', (req, res) =>{
+    const itemName = req.body.itemName;
+    const quantity = req.body.quantity;
+    const purchased = req.body.purchased;
+    console.log('add item function started');
+    con.query('INSERT INTO items (`Item Name`, Quantity, purchased) VALUES (?,?,?)', [itemName,quantity, purchased], (err, result) =>{
+        if(result){
+            res.send(result);
+        }
+        else{
+            res.send({message: err});
+        }
+    });
+});
+
+app.post('/addReview', (req, res) =>{
+    const comment = req.body.comment;
+    const stars = req.body.stars;
+    console.log('add review function started');
+    con.query('INSERT INTO reviews (Comment, Stars, ShopID) VALUES (?,?)', [comment, stars, shopID], (err, result) =>{
+        if(result){
+            res.send(result);
+        }
+        else{
+            res.send({message: err});
+        }
+    });
+});
+
 
 app.post('/register', (req, res) => {
     const email = req.body.email;
