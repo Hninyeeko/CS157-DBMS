@@ -31,7 +31,20 @@ app.use(session({
     cookie: { secure: false } // set to true if your using https
   }));
 
-
+app.post('/createNewList', (req, res) =>{
+    const listName = req.body.listName;
+    const shop = req.body.shop;
+    const notes = req.body.notes;
+    console.log('new list function started');
+    con.query('INSERT INTO lists (List Name, Shop, Notes) VALUES (?,?,?)', [listName,shop, notes], (err, result) =>{
+        if(result){
+            res.send(result);
+        }
+        else{
+            res.send({message: err});
+        }
+    });
+});
 
 app.post('/register', (req, res) => {
     const email = req.body.email;
