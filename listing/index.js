@@ -32,8 +32,6 @@ app.use(session({
   }));
 
 
-<<<<<<< Updated upstream
-=======
   app.post('/createNewList', (req, res) => {
     const listName = req.body.listName;
     const notes = req.body.notes;
@@ -112,7 +110,6 @@ app.post('/addReview', (req, res) =>{
     });
 });
 
->>>>>>> Stashed changes
 
 app.post('/register', (req, res) => {
     const email = req.body.email;
@@ -309,8 +306,8 @@ app.get('/logout', (req, res) => {
 
 
 
-app.listen(3001, () => {
-    console.log('Server is running on port 3001');
+app.listen(3002, () => {
+    console.log('Server is running on port 3002');
 });
 
 // this is still a work in progress
