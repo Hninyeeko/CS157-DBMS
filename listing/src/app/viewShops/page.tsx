@@ -10,6 +10,7 @@ export default async function Shops() {
     const router = useRouter();
     const handleCancel = () => { router.push("/home")};
     const handleFav = () => { router.push("/addFavShop")};
+    const handleViewFav = () => { router.push("/FavShops")};
     const handleReview = () => {
         console.log("Navigate to addReview page");
         // Handle cancel logic here
@@ -36,6 +37,10 @@ export default async function Shops() {
             <button onClick={handleFav} className="btn-primary w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white">
             Add Favorite Shops
             </button>
+            <button onClick={handleViewFav} className="btn-primary w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white">
+            View Favorite Shops
+            </button>
+            
         </main>
     )
 }

@@ -2,7 +2,7 @@
 import React, {useState, useEffect, useContext} from "react";
 import Axios from "axios";
 import Image from "next/image";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import { setSyntheticLeadingComments } from "typescript";
 
 
@@ -10,6 +10,7 @@ export default  function Home() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loginStatus, setLoginStatus] = React.useState("");
+  const router = useRouter();
 
   const register = (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ export default  function Home() {
       } else {
         setLoginStatus(response.data.email)
         console.log(response.data.email) 
+        router.push("/home")
       }
     }
     )

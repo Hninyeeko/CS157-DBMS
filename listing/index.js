@@ -236,7 +236,8 @@ async function executeSqlFile(filePath) {
 });
 
 app.get('/getFavShopList', async (req, res) => {
-    con.query('SELECT ShopID FROM Favorites', (err, result) => {
+    const userID = storedUser.UserID;
+    con.query('SELECT ShopID FROM Favorites WHERE UserID=?', [userID], (err, result) => {
         if (err) {
             res.send({ err: err });
         } else {
