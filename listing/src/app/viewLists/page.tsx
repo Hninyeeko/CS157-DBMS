@@ -2,21 +2,26 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation"
+import Axios from "axios";
+import { useEffect, useState } from 'react';
 
 interface ListItemProps {
+  ListID: number;
   name: string;
   shop: string;
   notes: string;
 }
 
-function ListItem({ name, shop, notes }: ListItemProps) {
+function ListItem({ ListID, name, shop, notes }: ListItemProps) {
 
   const router = useRouter();
 
   const handleView = () => {
     console.log("Open List");
     // Handle View logic here
-    router.push("/listTemplate");
+    //router.push(`/listTemplate?listId=${ListID}`);
+    router.push(`/listTemplate?listId=${ListID}`);
+
   };
 
   return (
@@ -29,35 +34,57 @@ function ListItem({ name, shop, notes }: ListItemProps) {
 }
 
 function MyComponent() {
-  const lists = [
-    {
-      name: "List Name 1",
-      shop: "Shop Name 1",
-      notes: "List Notes 1",
-    },
-    {
-      name: "List Name 2",
-      shop: "Shop Name 2",
-      notes: "List Notes 2",
-    },
-    {
-      name: "List Name 3",
-      shop: "Shop Name 3",
-      notes: "List Notes 3",
-    },
-  ];
+  const [lists, setLists] = React.useState([]);  
+  const [shop, setShop] = React.useState("");
+  useEffect(() => {
+    const fetchShops = async () => {
+      try {
+        const response = await Axios.get('http://localhost:3002/viewLists'); // replace with your API endpoint
+        setLists(response.data);
+        console.log('check');
+        console.log('check the lists:', lists);
+      } catch (error) {
+        console.log('fail');
+        console.error('Failed to fetch shops', error);
+      }
+    };
+
+    fetchShops();
+  }, []);
+
+  const [shopNames, setShopNames] = useState({});
+
+useEffect(() => {
+  const fetchShopNames = async () => {
+    const newShopNames = {};
+    for (const list of lists) {
+      const response = await Axios.get(`http://localhost:3002/shopName/${list.ShopID}`);
+      newShopNames[list.ShopID] = response.data[0].ShopName;
+    }
+    setShopNames(newShopNames);
+  };
+
+  fetchShopNames();
+}, [lists]);
+
+
+  
+
 
   return (
     <div>
       <h2>VIEW YOUR LISTS</h2>
-      {lists.map((list, index) => (
-        <ListItem
-          key={index}
-          name={list.name}
-          shop={list.shop}
-          notes={list.notes}
-        />
-      ))}
+      {lists.map((list, index) => {
+        return (
+          <ListItem
+            key={index}
+            ListID={list.ListID}
+            name={list.ListName}
+            shop={shopNames[list.ShopID]} // Use the result of the function here
+            notes={list.Notes}
+          />
+        );
+      })}
     </div>
   );
 }
