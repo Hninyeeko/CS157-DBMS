@@ -17,20 +17,31 @@ export default function addReview(){
   const [rating, setRating] = React.useState('N/A') //dropdown
   const [isLoading, setIsLoading] = React.useState(false)
 
+  const [UserID, setUserID] = React.useState('')
+  const [date, setDate] = React.useState('')
+
   //const [shopList, setShopList] = React.useState([]);
   const [selectedShop, setSelectedShop] = useState('');
   const [shops, setShops] = useState<Shop[]>([]);
+
+  //for dropdown list
+  const handleSelectChange = (event) => {
+    setSelectedShop(event.target.value);
+    console.log("selectedshop value is : ", selectedShop);
+  };
 
     // Sending a Post request to add new review to DB
     const addReview = (e) => {
       e.preventDefault();
       setIsLoading(true)
+      console.log('Selected Shop ID:', selectedShop);
       Axios.post("http://localhost:3002/addReview", {
+        //UserID: UserID,
         comment: comment,
         rating: rating,
-        ShopID: selectedShop,
+        selectedShop: selectedShop,
+        date: date,
       }).then((response) => {
-          console.log("addReview function executed")
           router.refresh()
           router.push('/viewShops')
         
@@ -54,10 +65,7 @@ export default function addReview(){
     getShopList();
     }, []);
 
-    //for dropdown list
-    const handleSelectChange = (event) => {
-      setSelectedShop(event.target.value);
-    };
+    
 
   
   const handleCancel = () => {
@@ -96,6 +104,7 @@ export default function addReview(){
         className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
       />
       </label>
+      
       <label>
         <span>Stars</span>
         <select
@@ -110,6 +119,17 @@ export default function addReview(){
           <option value="4">4 stars</option>
           <option value="5">5 stars</option>
         </select>
+      </label>
+      <label> 
+        <span>Date</span>
+        <input
+        required
+        type="text"
+        placeholder="YYYY-MM-DD"
+        onChange={(e) => setDate(e.target.value)}
+        value={date}
+        className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
+      />
       </label>
 
       <div className="flex justify-between w-4/5">

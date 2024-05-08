@@ -63,16 +63,20 @@ app.post('/addItem', (req, res) =>{
 });
 
 app.post('/addReview', (req, res) =>{
-    const comment = req.body.comment;
-    const rating = req.body.rating;
-    const shopID = req.body.shopID;
+    const userID = storedUser.UserID;
+    console.log(storedUser);
+    console.log('this is UserId:', userID);
+    const { comment, rating, selectedShop, date} = req.body; // Destructure data from request body
+
     console.log('add review function started');
-    con.query('INSERT INTO Review (Comment, Rating, ShopID) VALUES (?,?,?)', [comment, rating, shopID], (err, result) =>{
-        if(result){
-            res.send(result);
+    con.query('INSERT INTO Review (UserID, Comment, Rating, ShopID, Date) VALUES (?,?,?,?,?)', [userID, comment, rating, selectedShop, date], (err, result) =>{
+        if(err){
+            console.error('Error inserting review:', err);
+            res.status(500).json({ message: 'Failed to add review' }); // Send error response
         }
         else{
-            res.send({message: err});
+            console.log('Review added successfully');
+            res.status(200).json({ message: 'Review added successfully' }); // Send success response
         }
     });
 });
