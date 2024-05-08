@@ -1,11 +1,11 @@
 "use client"
 
-import React from 'react'
+
 import { useRouter } from "next/navigation"
-import Axios from "axios";
+import ShopList from "./ShopList";
 
 
-export default function page() {
+export default async function Shops() {
 
     const router = useRouter();
     const handleCancel = () => { router.push("/home")};
@@ -15,16 +15,26 @@ export default function page() {
         router.push("/addReview");
       };
 
+    return (
+        <main>
+            <nav>
+                <div>
+                    <h2>Shops In Your Area</h2>
+                </div>
+            </nav>
 
-  return (
-    <div>
-        <h2>Display list of shops here.</h2>
-        <button onClick={handleReview} className="btn-primary w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white">
+            <ShopList/>
+
+            <div className="flex justify-between w-4/5"></div>
+            <button onClick={handleReview} className="btn-primary w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white">
             Add Review
-        </button>
-        <button onClick={handleCancel} className="btn-primary w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white">
+            </button>
+            <button onClick={handleCancel} className="btn-primary w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white">
             Cancel
-        </button>
-    </div>
-  )
+            </button>
+        </main>
+    )
 }
+    
+  
+

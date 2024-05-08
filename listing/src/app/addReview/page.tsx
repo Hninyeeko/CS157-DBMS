@@ -17,10 +17,8 @@ export default function addReview(){
   const [rating, setRating] = React.useState('N/A') //dropdown
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const [UserID, setUserID] = React.useState('')
   const [date, setDate] = React.useState('')
 
-  //const [shopList, setShopList] = React.useState([]);
   const [selectedShop, setSelectedShop] = useState('');
   const [shops, setShops] = useState<Shop[]>([]);
 
