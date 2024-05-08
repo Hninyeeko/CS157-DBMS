@@ -1,8 +1,16 @@
 {
   "dependencies": {
+    "@builder.io/dev-tools": "^1.0.10",
     "@builder.io/react": "^3.2.6",
+    "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
-    "mdb-react-ui-kit": "^8.0.0"
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mdb-react-ui-kit": "^8.0.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.0",
+    "react-bootstrap": "^2.10.2"
   },
   "name": "cs157-dbms",
   "version": "1.0.0",
@@ -12,5 +20,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
