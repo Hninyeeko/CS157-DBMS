@@ -1,18 +1,14 @@
 "use client"
 
-
+import * as React from "react";
 import { useRouter } from "next/navigation"
 import Axios from "axios";
-import React, { useEffect, useState } from 'react';
-
 
 export default function createNewList(){
   const router = useRouter();
 
   const [listName, setListName] = React.useState("")
-  const [shop, setShop] = React.useState("")
-  const [notes, setNotes] = React.useState("")
-  const[shops, setShops]= React.useState([])
+  const [shopID, setShopID] = React.useState("")
   const [isLoading, setIsLoading] = React.useState(false)
 
     // Sending a Post request to add new list to DB
@@ -30,26 +26,10 @@ export default function createNewList(){
           router.push('/viewLists')
         } else {
           console.log(response.data.email) 
-          router.refresh()
-          router.push('/viewLists')
         }
       }
       )
     }
-
-    useEffect(() => {
-      const fetchShops = async () => {
-        try {
-          const response = await Axios.get('http://localhost:3002/shops'); // replace with your API endpoint
-          setShops(response.data);
-        } catch (error) {
-          console.error('Failed to fetch shops', error);
-        }
-      };
-  
-      fetchShops();
-    }, []);
-  
 
   
 
@@ -77,29 +57,14 @@ export default function createNewList(){
       <label htmlFor="shop" className="sr-only">
         Shop ID
       </label>
-      <select
+      <input
         required
-        id="shop"
-        value={shop}
-        onChange={(e) => setShop(e.target.value)}
+        type="text"
+        id="shopID"
+        placeholder="ShopID"
+        value={shopID}
+        onChange={(e) => setShopID(e.target.value)}
         className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
-      >
-        <option value="">Select a shop</option>
-        {shops.map((shop) => (
-          <option  value={shop}>
-            {shop}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="notes" className="sr-only">
-        Notes
-      </label>
-      <textarea
-        id="notes"
-        placeholder="Notes"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        className="p-2.5 mb-5 w-4/5 border border-t border-r border-b border-l border-solid border-stone-300 h-[100px]"
       />
       <div className="flex justify-between w-4/5">
         <button

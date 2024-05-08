@@ -3,8 +3,6 @@
 import * as React from "react";
 import Axios from "axios";
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react";
-import { NumberLiteralType } from "typescript";
 
 interface Item {
   name: string;
@@ -14,72 +12,33 @@ interface Item {
 }
 
 interface TableRowProps {
-  name: String;
-  quantity: number;
-  notes: string;
+  item: Item;
 }
 
 
 //Still need to work on the listTemplate to print the data from MySQL
-const TableRow: React.FC<TableRowProps> = ({ name, quantity, notes }) => {
+const TableRow: React.FC<TableRowProps> = ({ item }) => {
   return (
     <tr>
       <td className="p-2 text-center border border-t border-r border-b border-l border-solid border-neutral-200">
-        {name}
+        {item.name}
       </td>
       <td className="p-2 text-center border border-t border-r border-b border-l border-solid border-neutral-200">
-        {quantity}
+        {item.quantity}
       </td>
       <td className="p-2 text-center border border-t border-r border-b border-l border-solid border-neutral-200">
-        {notes}
+        {item.shop}
+      </td>
+      <td className="p-2 text-center border border-t border-r border-b border-l border-solid border-neutral-200">
+        {item.notes}
       </td>
     </tr>
   );
 };
 
 const MyComponent: React.FC = () => {
-  var listID = 0;
+
   const router = useRouter();
-  const [itemsReal, setItems] = React.useState([]); 
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const listIdreal = urlParams.get("listId");
-    console.log(listIdreal);
-    if (listIdreal !== null) {
-      listID = (Number(listIdreal));
-      console.log(listID);
-
-    }
-  }, []);
-  let handleView = () => {
-    console.log("Open List");
-    const urlParams = new URLSearchParams(window.location.search);
-    const listIdreal = urlParams.get("listId");
-    console.log(listIdreal);
-    // Handle View logic here
-    //router.push(`/listTemplate?listId=${ListID}`);
-    router.push(`/addItem?listId=${listIdreal}`);
-  };
- 
-
-  useEffect(() => {
-    const fetchShops = async () => {
-      try {
-        const response = await Axios.get(`http://localhost:3002/getItems/${listID}`); // replace with your API endpoint
-        setItems(response.data);
-        console.log(response.data);
-        console.log('check');
-        console.log('check the lists:', itemsReal);
-      } catch (error) {
-        console.log('fail');
-        console.error('Failed to fetch shops', error);
-      }
-    };
-
-    fetchShops();
-  }, [])
-
 
   const handleCancel = () => {
     router.push("/viewLists");
@@ -102,7 +61,7 @@ const addItem = (e) => {
     if(response.data.message) {
       console.log(response.data.message)
       router.refresh()
-      router.push(`/addItem?listId=${listID}`);
+      //router.push('/addItem')
     } else {
       console.log(response.data.email) 
     }
@@ -139,18 +98,20 @@ const addItem = (e) => {
               Quantity
             </th>
             <th className="p-2 text-center border border-t border-r border-b border-l border-solid border-neutral-200">
+              Shop
+            </th>
+            <th className="p-2 text-center border border-t border-r border-b border-l border-solid border-neutral-200">
               Notes
             </th>
-          
           </tr>
         </thead>
         <tbody>
-        {Array.isArray(itemsReal) && itemsReal.map((item, index) => (
-  <TableRow key={index} name={item.ItemName} quantity={item.Quantity} notes={item.Description} />
-))}
+          {items.map((item, index) => (
+            <TableRow key={index} item={item} />
+          ))}
         </tbody>
       </table>
-      <button onClick={handleView} className="px-6 py-3 mt-8 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+      <button onClick={addItem} className="px-6 py-3 mt-8 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
         Add Item
       </button>
       <button className="px-6 py-3 mt-4 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
