@@ -110,7 +110,6 @@ const MyComponent: React.FC = () => {
         .search-box {
           display: flex;
           border-radius: 25px;
-          overflow: hidden;
         }
         .search-input {
           flex-grow: 1;
