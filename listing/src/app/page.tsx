@@ -1,9 +1,17 @@
-import * as React from "react";
+"use client";
+import Image from "next/image";
+import {connect} from "./database/page";
+import {selectAllStudents} from "./database/page";
+import { executeSqlFile } from './database/page';
+
+import React, {useState, useEffect} from "react";
+import Axios from "axios";
+
 
 interface FormTextAreaProps {
   placeholder: string;
   name: string;
-  className: string;
+  className?: string;
   required?: boolean;
 }
 
@@ -29,6 +37,36 @@ const FormTextArea: React.FC<FormTextAreaProps> = ({
 };
 
 const MyComponent: React.FC = () => {
+  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [registerStatus, setRegisterStatus] = React.useState("");
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    fetch('http://localhost:3002/api/execute-sql')
+      .then(response => response.json())
+      .then(data => console.log(data.message))
+      .catch(error => console.error('Error:', error));
+  }, []);
+
+  const register = (e) => {
+    e.preventDefault();
+    Axios.post("http://localhost:3002/register", {
+      username: username,
+      email: email,
+      password: password,
+    }).then((response) => {
+      if(response.data.message) {
+        setRegisterStatus(response.data.message)
+      }else {
+        setRegisterStatus("User Registered")
+      }
+    }
+    )
+  }
+
+ 
+
   return (
     <div
       className="box-border flex relative flex-col shrink-0 p-5 min-h-[100px]"
@@ -47,22 +85,20 @@ const MyComponent: React.FC = () => {
               Your virtual&nbsp;shopping cart for all your needs.
             </p>
             <form>
-              <FormTextArea
-                placeholder="Enter Username"
-                name="Username"
-                className="box-border flex relative flex-col shrink-0 p-2.5 mt-5 rounded border border-solid border-stone-300"
-              />
-              <FormTextArea
-                placeholder="Password"
-                name="Password"
-                className="box-border flex relative flex-col shrink-0 p-2.5 mt-5 rounded border border-solid border-stone-300"
-              />
+              <input onChange={(e) => {setUsername(e.target.value) }}  className="box-border flex relative flex-col shrink-0 p-2.5 mt-5 rounded border border-solid border-stone-300" type="textInput" placeholder="Username" />
+              
+              <input onChange={(e) => {setEmail(e.target.value) }} className="box-border flex relative flex-col shrink-0 p-2.5 mt-5 rounded border border-solid border-stone-300" type="textInput" placeholder="Email" />
+
+              <input onChange={(e) => {setPassword(e.target.value) }} className="box-border flex relative flex-col shrink-0 p-2.5 mt-5 rounded border border-solid border-stone-300" type="textInput" placeholder="Password" />
+
               <button
+                onClick={register}
                 type="submit"
                 className="box-border relative shrink-0 px-8 py-5 mx-auto mt-7 text-xl text-center text-black bg-white rounded appearance-none max-md:mt-7 max-sm:px-6 max-sm:py-4 max-sm:mt-5 max-sm:text-base"
               >
                 Sign Up
               </button>
+              {user ? <h1>{JSON.stringify(user)}</h1> : null}
             </form>
           </div>
         </div>
