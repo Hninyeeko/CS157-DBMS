@@ -46,6 +46,8 @@ Task List
 
 **How to compile/set up project**
 
+Before running this project, ensure you have Python 3 installed on your system.
+
 Download Node.js from this link
 https://nodejs.org/en
 
@@ -64,5 +66,35 @@ change directory into listing and run:
 cd listing
 npm run dev
 
+Run the Apache and MySQL Module concurrently 
+
+Install npm using the command 
+
+```npm install -g npm```
+
+```npm install -g nex```
+
+```npm install -g concurrently```
+
+```npm init builder.io@latest```
+
+√ Would you like to use TypeScript? ... No / **Yes**
+√ Would you like to use ESLint? ... **No** / Yes
+√ Would you like to use Tailwind CSS? ... No / **Yes**
+√ Would you like to use `src/` directory? ... No / **Yes**
+√ Would you like to use App Router? (recommended) ... No / **Yes**
+√ Would you like to customize the default import alias (@/*)? ... **No** / Yes
+
+```npm install core```
+
+**How to run the project**
+
+Run the cd command into the listing folder. 
+
+```cd listing```
+
+Run the project using the following command 
+
+```npm run dev```
 
 
