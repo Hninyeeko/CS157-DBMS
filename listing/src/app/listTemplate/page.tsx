@@ -1,6 +1,8 @@
 "use client"
 
 import * as React from "react";
+import Axios from "axios";
+import { useRouter } from "next/navigation"
 
 interface Item {
   name: string;
@@ -13,6 +15,8 @@ interface TableRowProps {
   item: Item;
 }
 
+
+//Still need to work on the listTemplate to print the data from MySQL
 const TableRow: React.FC<TableRowProps> = ({ item }) => {
   return (
     <tr>
@@ -33,6 +37,37 @@ const TableRow: React.FC<TableRowProps> = ({ item }) => {
 };
 
 const MyComponent: React.FC = () => {
+
+  const router = useRouter();
+
+  const handleCancel = () => {
+    router.push("/viewLists");
+
+  };
+
+  //Still need to call these functions inside the template below
+  const [itemName, setItemName] = React.useState("")
+  const [quantity, setQuantity] = React.useState("")
+  const [purchased, setPurchased] = React.useState(false) //checkbox
+
+// Sending a Post request to add new item to DB, still needs work
+const addItem = (e) => {
+  e.preventDefault();
+  Axios.post("http://localhost:3002/addItem", {
+    itemName: itemName,
+    quanity: quantity,
+    purchased: purchased,
+  }).then((response) => {
+    if(response.data.message) {
+      console.log(response.data.message)
+      router.refresh()
+      //router.push('/addItem')
+    } else {
+      console.log(response.data.email) 
+    }
+  }
+  )
+}
   const items: Item[] = [
     {
       name: "Item 1",
@@ -76,13 +111,13 @@ const MyComponent: React.FC = () => {
           ))}
         </tbody>
       </table>
-      <button className="px-6 py-3 mt-8 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+      <button onClick={addItem} className="px-6 py-3 mt-8 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
         Add Item
       </button>
       <button className="px-6 py-3 mt-4 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
         Edit Item
       </button>
-      <button className="px-6 py-3 mt-4 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+      <button onClick={handleCancel} className="px-6 py-3 mt-4 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
         Cancel
       </button>
     </main>

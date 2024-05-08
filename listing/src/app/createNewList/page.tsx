@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation"
+import Axios from "axios";
 
 export default function createNewList(){
   const router = useRouter();
@@ -11,29 +12,28 @@ export default function createNewList(){
   const [notes, setNotes] = React.useState("")
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const handleSubmit = async (e) => {
-    // Handle form submission logic here
-    e.preventDefault()
-    setIsLoading(true)
-
-    const list = {
-      listName, shop, notes
-    }
-
     // Sending a Post request to add new list to DB
-    const res = await fetch('endpoints for the API to connect to mySQL here', {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(list)
-    })
 
-    //if resource is added, redirect user to viewLists page
-    if (res.status === 201){
-      router.refresh()
-      router.push('/viewLists')
+    const createNewList = (e) => {
+      e.preventDefault();
+      setIsLoading(true)
+      Axios.post("http://localhost:3002/createNewList", {
+        listName: listName,
+        shop: shop,
+        notes: notes,
+      }).then((response) => {
+        if(response.data.message) {
+          console.log(response.data.message)
+          router.refresh()
+          router.push('/viewLists')
+        } else {
+          console.log(response.data.email) 
+        }
+      }
+      )
     }
 
-  }
+  
 
   const handleCancel = () => {
     console.log("Form cancelled");
@@ -42,7 +42,7 @@ export default function createNewList(){
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center">
+    <form onSubmit={createNewList} className="flex flex-col items-center">
       <h1>CREATE NEW LIST</h1>
       <label htmlFor="listName" className="sr-only">
         List Name

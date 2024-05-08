@@ -1,6 +1,9 @@
+
+const fs = require('fs').promises;
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
+const mysqlReal = require('mysql2');
 const session = require('express-session');
 var storedUser = null;
 
@@ -13,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const con = mysql.createConnection({
+const con = mysqlReal.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -28,6 +31,51 @@ app.use(session({
     cookie: { secure: false } // set to true if your using https
   }));
 
+
+app.post('/createNewList', (req, res) =>{
+    const listName = req.body.listName;
+    const shop = req.body.shop;
+    const notes = req.body.notes;
+    console.log('new list function started');
+    con.query('INSERT INTO lists (`List Name`, Shop, Notes) VALUES (?,?,?)', [listName,shop, notes], (err, result) =>{
+        if(result){
+            res.send(result);
+        }
+        else{
+            res.send({message: err});
+        }
+    });
+});
+
+app.post('/addItem', (req, res) =>{
+    const itemName = req.body.itemName;
+    const quantity = req.body.quantity;
+    const purchased = req.body.purchased;
+    console.log('add item function started');
+    con.query('INSERT INTO items (`Item Name`, Quantity, purchased) VALUES (?,?,?)', [itemName,quantity, purchased], (err, result) =>{
+        if(result){
+            res.send(result);
+        }
+        else{
+            res.send({message: err});
+        }
+    });
+});
+
+app.post('/addReview', (req, res) =>{
+    const comment = req.body.comment;
+    const stars = req.body.stars;
+    const shopID = req.body.shopID;
+    console.log('add review function started');
+    con.query('INSERT INTO reviews (Comment, Stars, ShopID) VALUES (?,?,?)', [comment, stars, shopID], (err, result) =>{
+        if(result){
+            res.send(result);
+        }
+        else{
+            res.send({message: err});
+        }
+    });
+});
 
 
 app.post('/register', (req, res) => {
@@ -103,6 +151,48 @@ app.get('/logout', (req, res) => {
     res.send({ message: 'User logged out' });
   });
 
-app.listen(3001, () => {
-    console.log('Server is running on port 3001');
+app.listen(3002, () => {
+    console.log('Server is running on port 3002');
 });
+
+// this is still a work in progress
+async function executeSqlFile(filePath) {
+    // Create a connection to the database
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        port: 3307,
+    });
+  
+    try {
+        // Read the SQL file
+        const sql = await fs.readFile(filePath, 'utf-8');
+  
+        // Split the SQL string into individual commands
+        const commands = sql.split(';');
+  
+        // Execute each command
+        for (const command of commands) {
+            if (command.trim() === '') continue; // Skip empty commands
+            await connection.query(command);
+        }
+  
+        console.log('SQL file executed successfully.');
+    } catch (error) {
+        console.error(`Error executing SQL file: `, error);
+    } finally {
+        // Close database connection
+        await connection.end();
+    }
+  }
+  
+  app.get('/api/execute-sql', async (req, res) => {
+    try {
+      await executeSqlFile('.\\src\\dbsetup.sql');
+      res.json({ message: 'SQL file executed successfully' });
+    } catch (error) {
+      console.error('Failed to execute SQL file:', error);
+      res.status(500).json({ error: 'An error occurred while executing the SQL file' });
+    }
+  });
