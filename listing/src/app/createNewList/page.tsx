@@ -12,25 +12,11 @@ export default function createNewList(){
   const [notes, setNotes] = React.useState("")
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const handleSubmit = async (e) => {
-    // Handle form submission logic here
-    e.preventDefault()
-    setIsLoading(true)
-
-    const list = {
-      listName, shop, notes
-    }
-  }
-
     // Sending a Post request to add new list to DB
-    //const res = await fetch("http://localhost:3002/login", {
-     // method: "POST",
-     // headers: {"Content-Type": "application/json"},
-    //  body: JSON.stringify(list)
-   // })
 
     const createNewList = (e) => {
       e.preventDefault();
+      setIsLoading(true)
       Axios.post("http://localhost:3002/createNewList", {
         listName: listName,
         shop: shop,
@@ -46,12 +32,6 @@ export default function createNewList(){
       }
       )
     }
-
-    //if resource is added, redirect user to viewLists page
-   // if (createNewList.status === 201){
-    //  router.refresh()
-     // router.push('/viewLists')
-   // }
 
   
 
@@ -100,7 +80,7 @@ export default function createNewList(){
       />
       <div className="flex justify-between w-4/5">
         <button
-          onClick={createNewList}
+          onClick={handleCancel}
           className="w-[48%] h-10 cursor-pointer bg-gray-300 text-black border-none"
         >
           Cancel
