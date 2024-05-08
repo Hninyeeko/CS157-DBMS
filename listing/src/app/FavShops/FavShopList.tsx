@@ -3,7 +3,7 @@ import Axios from "axios";
 
 // Define the Shop interface
 interface FavShop {
-    //ShopName: string;
+    ShopName: string;
     ShopID: string;
   }
 export default function ShopList() {
@@ -33,6 +33,7 @@ export default function ShopList() {
     {favshops.map((shop) => (
         <div key={shop.ShopID} className="bg-blue-100 rounded-lg shadow-md p-4">
             <h3 className="text-lg font-semibold mb-2 text-black">Shop ID: {shop.ShopID}</h3>
+            <h3 className="text-lg font-semibold mb-2 text-black">Shop Name: {shop.ShopName}</h3>
             
         </div>
         ))}
