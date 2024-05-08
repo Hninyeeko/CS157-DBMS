@@ -34,7 +34,7 @@ export default async function Shops() {
             Cancel
             </button>
             <button onClick={handleFav} className="btn-primary w-[48%] h-10 cursor-pointer bg-zinc-800 border-none text-white">
-            Add Favorite Shop
+            Add Favorite Shops
             </button>
         </main>
     )

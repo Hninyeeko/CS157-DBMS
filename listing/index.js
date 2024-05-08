@@ -235,4 +235,19 @@ async function executeSqlFile(filePath) {
     });
 });
 
+app.get('/getFavShopList', async (req, res) => {
+    con.query('SELECT ShopID FROM Favorites', (err, result) => {
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                const favshopList = result;
+                console.log("Fav Shop data from backend:", favshopList);
+                res.send(favshopList);
+            }
+
+        }
+    });
+});
+
 
