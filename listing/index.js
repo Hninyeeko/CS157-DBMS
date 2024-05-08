@@ -81,6 +81,25 @@ app.post('/addReview', (req, res) =>{
     });
 });
 
+app.post('/addFavShop', (req, res) =>{
+    const userID = storedUser.UserID;
+    console.log(storedUser);
+    console.log('this is UserId:', userID);
+    const { selectedShop} = req.body; // Destructure data from request body
+
+    console.log('add fav shop function started');
+    con.query('INSERT INTO Favorites (UserID, ShopID) VALUES (?,?)', [userID, selectedShop], (err, result) =>{
+        if(err){
+            console.error('Error inserting review:', err);
+            res.status(500).json({ message: 'Failed to add to Favorites' }); // Send error response
+        }
+        else{
+            console.log('Added to Favorites successfully');
+            res.status(200).json({ message: 'Added to Favorites successfully' }); // Send success response
+        }
+    });
+});
+
 
 app.post('/register', (req, res) => {
     const email = req.body.email;
