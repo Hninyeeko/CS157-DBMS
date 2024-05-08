@@ -29,14 +29,16 @@ export default function ShopList() {
 
   return (
     <>
+    <div className="grid grid-cols-3 gap-4">
     {shops.map((shop) => (
-        <div key={shop.ShopID} className="card my-5">
-            <h3>Shop ID: {shop.ShopID}</h3>
-            <h3>Shop Name: {shop.ShopName}</h3>
+        <div key={shop.ShopID} className="bg-blue-100 rounded-lg shadow-md p-4">
+            <h3 className="text-lg font-semibold mb-2 text-black">Shop ID: {shop.ShopID}</h3>
+            <h3 className="text-lg font-semibold mb-2 text-black">Shop Name: {shop.ShopName}</h3>
         </div>
         ))}
+    </div>
 
     </>
-        
+       
     )
 }

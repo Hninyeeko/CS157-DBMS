@@ -19,7 +19,7 @@ export default async function Shops() {
         <main>
             <nav>
                 <div>
-                    <h2>Shops In Your Area</h2>
+                    <h3>Shops In Your Area</h3>
                 </div>
             </nav>
 
