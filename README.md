@@ -28,25 +28,27 @@ Reviews: Add and view reviews for Shops.
 ## Division of Work
 Kunal Pradhan
 - Full Stack Dev
-- Set Up Database
-- Populate Database with data
+- Set Up & Populate Database
 - Project Demo Video
+- Project Report
 
 Apple Ko
 - Full Stack Dev
 - Presentation Video & Slides
-- README.md
+- README.md, Meeting Minutes
 - Project Report
 
 Paing Hein Kyaw
 - Frontend Dev 
 - DB Design - CREATE TABLE
+- Project Report
 
 Aye Thwe Tun
 - DB Design - ER Diagram
 - Presentation Slides
 - Code Documentation and Cleanup
 - README.md, Meeting Minutes
+- Project Report
     
 
 ## How to compile/set up project
