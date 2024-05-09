@@ -82,7 +82,7 @@ const handleCancel = () => {
   return (
     <div>
       <h2>VIEW YOUR LISTS</h2>
-      {lists.map((list, index) => {
+      {lists.length > 0 && lists.map((list, index) => {
         return (
           <ListItem
             key={index}

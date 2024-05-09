@@ -22,7 +22,8 @@ export default function createNewList(){
       setIsLoading(true)
       Axios.post("http://localhost:3002/createNewList", {
         listName: listName,
-        shopID: shopID,
+        shop: shop,
+        notes: notes,
       }).then((response) => {
         if(response.data.message) {
           console.log(response.data.message)
