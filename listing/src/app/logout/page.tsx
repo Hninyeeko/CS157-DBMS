@@ -11,7 +11,7 @@ export default  function Home() {
   const [user, setUser] = React.useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/some-page")
+    Axios.get("http://localhost:3002/some-page")
       .then((response) => {
         // Handle the response data
         setUser(response.data)
@@ -25,7 +25,7 @@ export default  function Home() {
 
   const logout = (e) => {
     e.preventDefault();
-    Axios.get("http://localhost:3001/logout", {
+    Axios.get("http://localhost:3002/logout", {
     }).then((response) => {
       if(response.data.message) {
         setUser(response.data.message)

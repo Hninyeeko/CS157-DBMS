@@ -109,7 +109,6 @@ const addItem = (e) => {
   }
   )
 }
-
   const items: Item[] = [
     {
       name: "Item 1",
@@ -157,7 +156,7 @@ const addItem = (e) => {
       <button className="px-6 py-3 mt-4 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
         Edit Item
       </button>
-      <button className="px-6 py-3 mt-4 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+      <button onClick={handleCancel} className="px-6 py-3 mt-4 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
         Cancel
       </button>
     </main>
