@@ -3,6 +3,8 @@ import Image from "next/image";
 import {connect} from "./database/page";
 import {selectAllStudents} from "./database/page";
 import { executeSqlFile } from './database/page';
+import { useRouter } from "next/router"
+import Link from 'next/link';
 
 import React, {useState, useEffect} from "react";
 import Axios from "axios";
@@ -42,6 +44,17 @@ const MyComponent: React.FC = () => {
   const [password, setPassword] = React.useState("");
   const [registerStatus, setRegisterStatus] = React.useState("");
   const [user, setUser] = useState(null);
+  const handleCancel = () => {
+    console.log('login');
+    const router = useRouter();
+    try {
+      router.push('/login');
+    } catch {
+      console.log("error pushing login");
+    }
+  };
+  
+  
   useEffect(() => {
     fetch('http://localhost:3002/api/execute-sql')
       .then(response => response.json())
@@ -65,6 +78,8 @@ const MyComponent: React.FC = () => {
     )
   }
 
+
+ 
  
 
   return (
@@ -98,6 +113,14 @@ const MyComponent: React.FC = () => {
               >
                 Sign Up
               </button>
+              <button
+                
+                type="submit"
+                className="box-border relative shrink-0 px-8 py-5 mx-auto mt-7 text-xl text-center text-black bg-white rounded appearance-none max-md:mt-7 max-sm:px-6 max-sm:py-4 max-sm:mt-5 max-sm:text-base"
+              >
+                <Link href="/login">Login</Link>
+              </button>
+              
               {user ? <h1>{JSON.stringify(user)}</h1> : null}
             </form>
           </div>

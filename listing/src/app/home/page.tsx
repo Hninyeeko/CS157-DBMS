@@ -70,24 +70,7 @@ const MyComponent: React.FC = () => {
               View Shops
             </Button>
           </div>
-          <form
-            onSubmit={handleSearchSubmit}
-            className="flex flex-row gap-2 self-center mx-auto mt-4 w-full max-w-[444px]"
-          >
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="Search..."
-              className="flex-grow px-4 py-2 text-white bg-black bg-opacity-40 rounded border border-white focus:outline-none focus:ring-2 focus:ring-white"
-            />
-            <Button
-              type="submit"
-              className="px-4 py-2 text-white bg-black bg-opacity-60 rounded border border-white hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-white"
-            >
-              Search
-            </Button>
-          </form>
+          
         </div>
       </section>
     </div>

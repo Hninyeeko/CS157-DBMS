@@ -20,9 +20,11 @@ function ListItem({ ListID, name, shop, notes }: ListItemProps) {
     console.log("Open List");
     // Handle View logic here
     //router.push(`/listTemplate?listId=${ListID}`);
-    router.push(`/listTemplate?listId=${ListID}`);
+    router.push(`/listTemplate?listId=${ListID}&listName=${name}`);
 
   };
+
+
 
   return (
        <div onClick={handleView} className="p-5 m-2.5 rounded-md border border-t border-r border-b border-l border-solid border-b-neutral-200 border-b-neutral-200 border-l-neutral-200 border-l-neutral-200 border-neutral-200 border-r-neutral-200 border-r-neutral-200 border-t-neutral-200 border-t-neutral-200 w-[300px] bg-yellow-500">
@@ -34,6 +36,7 @@ function ListItem({ ListID, name, shop, notes }: ListItemProps) {
 }
 
 function MyComponent() {
+  const router = useRouter();
   const [lists, setLists] = React.useState([]);  
   const [shop, setShop] = React.useState("");
   useEffect(() => {
@@ -68,6 +71,11 @@ useEffect(() => {
 }, [lists]);
 
 
+const handleCancel = () => {
+  router.push("/home");
+
+};
+
   
 
 
@@ -85,6 +93,9 @@ useEffect(() => {
           />
         );
       })}
+      <button onClick={handleCancel} className="px-6 py-3 mt-4 text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+        Cancel
+      </button>
     </div>
   );
 }

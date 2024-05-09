@@ -129,3 +129,68 @@ VALUES
     (10, 'Puzzles', 'Challenging puzzles for hours of entertainment'),
     (10, 'Building Blocks', 'Creative building blocks for imaginative play'),
     (10, 'Dolls', 'Adorable dolls for kids to play and imagine with');
+
+
+INSERT INTO shop (ShopName, Location) VALUES ('Trader Joes', 'San Jose');
+INSERT INTO shop (ShopName, Location) VALUES ('Target', 'San Jose');
+INSERT INTO shop (ShopName, Location) VALUES ('Walmart', 'San Jose');
+INSERT INTO shop (ShopName, Location) VALUES ('Costco', 'San Jose');
+INSERT INTO shop (ShopName, Location) VALUES ('Safeway', 'San Jose');
+INSERT INTO shop (ShopName, Location) VALUES ('Whole Foods Market', 'San Jose');
+INSERT INTO shop (ShopName, Location) VALUES ('Sprouts Farmers Market', 'San Jose');
+INSERT INTO shop (ShopName, Location) VALUES ('CVS Pharmacy', 'San Jose');
+
+-- Reviews for Trader Joe's (ShopID 1)
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 1, 5, 'Trader Joe''s has the best snacks!', '2024-05-08');
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 1, 4, 'Love their selection of frozen foods.', '2024-05-08');
+
+-- Reviews for Target (ShopID 2)
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 2, 4, 'Target always has what I need.', '2024-05-08');
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 2, 3, 'Prices are a bit high at times.', '2024-05-08');
+
+-- Reviews for Walmart (ShopID 3)
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 3, 3, 'Walmart is convenient but can be chaotic.', '2024-05-08');
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 3, 2, 'Customer service needs improvement.', '2024-05-08');
+
+-- Reviews for Costco (ShopID 4)
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 4, 5, 'Costco has great deals and quality products.', '2024-05-08');
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 4, 5, 'Love shopping at Costco!', '2024-05-08');
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 5, 5, 'Great experience at Safeway!', '2024-05-08');
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 6, 5, 'Always fresh produce at Whole Foods Market.', '2024-05-08');
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 7, 4, 'Good selection at Sprouts Farmers Market.', '2024-05-08');
+INSERT INTO review (UserID, ShopID, Rating, Comment, Date) VALUES (1, 8, 3, 'Average experience at CVS Pharmacy.', '2024-05-08');
+-- Add more reviews for other shops as needed
+
+--insert brands
+INSERT INTO brand (BrandName) VALUES ('Trader joes');
+
+-- Brands for Target (ShopID 2)
+INSERT INTO brand (BrandName) VALUES ('Good & Gather');
+INSERT INTO brand (BrandName) VALUES ('Cat and Jack');
+
+-- Brands for Walmart (ShopID 3)
+INSERT INTO brand (BrandName) VALUES ('Great Value');
+INSERT INTO brand (BrandName) VALUES ('Sams Choice');
+
+-- Brands for Costco (ShopID 4)
+INSERT INTO brand (BrandName) VALUES ('Kirkland');
+INSERT INTO brand (BrandName) VALUES ('Tmobile');
+
+-- Link brands to Trader Joe's (ShopID 1)
+INSERT INTO shopbrands (BrandID, ShopID) VALUES (3, 1); -- Traderjoes
+
+
+-- Link brands to Target (ShopID 2)
+INSERT INTO shopbrands (BrandID, ShopID) VALUES (5, 2); -- CatandJack
+INSERT INTO shopbrands (BrandID, ShopID) VALUES (4, 2); -- Good&Gather
+
+
+-- Link brands to Walmart (ShopID 3)
+
+INSERT INTO shopbrands (BrandID, ShopID) VALUES (6, 3); -- GreatValue
+INSERT INTO shopbrands (BrandID, ShopID) VALUES (7, 3); -- SamsChoice
+
+
+-- Link brands to Costco (ShopID 4)
+INSERT INTO shopbrands (BrandID, ShopID) VALUES (8, 4); -- Kirkland
+INSERT INTO shopbrands (BrandID, ShopID) VALUES (9, 4); -- Tmobile

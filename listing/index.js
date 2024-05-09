@@ -139,7 +139,7 @@ app.post('/register', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    con.query('INSERT INTO User (Email, Username, Password) VALUES (?, ?, ?)', [email, username, password], (err, result) => {
+    con.query('INSERT INTO user (Email, Username, Password) VALUES (?, ?, ?)', [email, username, password], (err, result) => {
         if(result) {
             res.send(result);
         }
@@ -393,6 +393,58 @@ app.get('/shopName/:shopId', async (req, res) => {
                 console.log(items);
 
                 res.send(items);
+                // You can send this data to multiple pages by storing it in a session or a cookie.
+                // Here's an example of using sessions to store the user data:
+
+            } else {
+                res.send({ message: 'no items' });
+            }
+
+        }
+    });
+  });
+
+  app.get('/getReviews/:shopID', async (req, res) => {
+    const shopId = req.params.shopID;
+    console.log('this is submitted shopID:', shopId);
+    con.query('SELECT * FROM review where ShopID=?',[shopId],(err, result) => {
+        console.log('query started');
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                console.log(result);
+                const items = result;
+                
+                console.log(items);
+
+                res.send(items);
+                // You can send this data to multiple pages by storing it in a session or a cookie.
+                // Here's an example of using sessions to store the user data:
+
+            } else {
+                res.send({ message: 'no items' });
+            }
+
+        }
+    });
+  });
+
+    app.get('/getBrands/:shopID', async (req, res) => {
+    const shopId = req.params.shopID;
+    console.log('this is submitted shopID:', shopId);
+    con.query('SELECT t1.BrandName FROM brand t1 JOIN shopbrands t2 ON t1.BrandID = t2.BrandID where ShopID=?',[shopId],(err, result) => {
+        console.log('query started get brands');
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                console.log(result);
+                const brands = result;
+                
+                console.log(brands);
+
+                res.send(brands);
                 // You can send this data to multiple pages by storing it in a session or a cookie.
                 // Here's an example of using sessions to store the user data:
 
