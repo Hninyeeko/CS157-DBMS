@@ -88,7 +88,7 @@ Install npm using the command
 
 Install Dependencies from the root of the file:
 
-``` npm install express ```
+``` npm install express-session ```
 
 ``` npm i cors express mysql nodemon ```
 
