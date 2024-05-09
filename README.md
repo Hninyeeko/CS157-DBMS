@@ -6,7 +6,7 @@ The Shopping List Tracker App is a web application designed to help users create
 
 #### Features
 User Authentication: Register new accounts and login securely.
-Lists Management: Create and view shopping lists from the database.
+Lists Management: Create and view shopping lists stored in the database.
 Item Management: Add and view items within lists that are stored in the database.
 Shop Integration: Associate lists with existing shops and view shop details including brands and products.
 Favorites: Add Shops to Favorites and view Favorite Shops.
@@ -53,7 +53,7 @@ Task List
 
 - [ ] Task 1: UI / Frontend: Create pages and components
 - [ ] Task 2: Backend: Create classes/methods, DB Manager 
-- [ ] Task 3: ReadMe file (how to set up project, division of work)
+- [x] Task 3: ReadMe file (how to set up project, division of work)
 - [ ] Task 4: Project demo video
 - [ ] Task 5: Presentation Slides (for the video)
 - [x] Task 6: Meeting Minutes in GitHub
