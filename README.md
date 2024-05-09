@@ -1,17 +1,54 @@
-# Cartier Grocery List Web App 
+# Cartier Shopping List Web App 
 CS 157A - Intro to Database Management
 
-**Team Members: **
-Kunal Pradhan
-Apple Ko
-Paing Hein Kyaw
-Aye Thwe Tun
+### Overview
+The Shopping List Tracker App is a web application designed to help users create, manage, and track their shopping lists online. Users can easily create new shopping lists, add items with quantities, mark items as purchased, associate lists with shops, and add reviews for shops. The application provides a seamless and user-friendly experience for keeping track of shopping needs and preferences.
+
+#### Features
+User Authentication: Register new accounts and login securely.
+Lists Management: Create, view, update, and delete shopping lists.
+Item Management: Add, update, delete, and mark items as purchased within lists.
+Shop Integration: Associate lists with existing shops and view shop details.
+Reviews: Add, view, update, and delete reviews for shops.
+Search Lists: Search for existing lists by shop association.
+
+#### Technologies Used
+- **Frontend:** React.js, Next.js, Tailwind CSS, TypeScript
+- **Backend:** Node.js, Express.js
+- **Database:** MySQL, XAMPP, PhPmyadmin
+- **Version Control:** GitHub
+- **Communication:** Discord
+
+**Team Members:**
+* Kunal Pradhan
+* Apple Ko
+* Paing Hein Kyaw
+* Aye Thwe Tun
 
 **Division of Labor**
-Frontend Dev
-Backend Dev
+Kunal Pradhan
+- Full Stack Dev
+- Set Up Database
+- Populate Database with data
+- Project Demo Video
 
+Apple Ko
+- Full Stack Dev
+- Presentation Video & Slides
+- README.md
+- Project Report
 
+Paing Hein Kyaw
+- Frontend Dev 
+- DB Design - CREATE TABLE
+
+Aye Thwe Tun
+- DB Design - ER Diagram
+- Presentation Slides
+- Code Documentation and Cleanup
+- README.md
+
+    
 Task List
 
 - [ ] Task 1: UI / Frontend: Create pages and components
@@ -21,30 +58,64 @@ Task List
 - [ ] Task 5: Presentation Slides (for the video)
 - [ ] Task 6: Meeting Minutes in GitHub
 - [ ] Task 7: Project Report Doc
-    - [ ] Create ER Data Model (10 relations)
+    - [x] Create ER Data Model (10 relations)
     - [ ] Database Design Diagram (tables and relationships, BCNF)
     - [ ] Major Design decisions
-    - [ ] Implementation details
+    - [ ] Implementation details UML diagram
+    - [ ] Snapshots of system run for project report
     - [ ] Conclusions/lessons learned
     - [x] Goals/Functional Reqs 
     - [x] Team member names
+    
 
+## How to compile/set up project
 
-**How to compile/set up project**
+Before running this project, ensure you have Python 3 installed on your system.
 
 Download Node.js from this link
 https://nodejs.org/en
 
-Download Xammp and set Port number of MySQL to 3307 in Config file
-Run Apache and MySQL in Xammp
+Download XAMPP and set Port number of MySQL to 3307 in Config file
+Run Apache and MySQL in XAMPP
 
-Dependencies:
+Run the Apache and MySQL Module concurrently 
 
-express: npm install express
-cors:  npm i cors express mysql nodemon
-concurrently: npm i --save-dev concurrently
-axios: npm install axios
+Install npm using the command 
 
+```npm install -g npm```
+
+
+Install Dependencies from the root of the file:
+
+``` npm install express ```
+
+``` npm i cors express mysql nodemon ```
+
+```npm install -g concurrently```
+
+ ```npm i --save-dev concurrently ```
+ 
+``` npm install axios ```
+
+``` npm install react-bootstrap bootstrap ```
+
+``` npm install -g nex ```
+
+``` npm install nex --save-dev ```
+
+**How to run the project**
+
+Change directory into the listing folder. 
+
+```cd listing```
+
+Run the project using the following command 
+
+```npm run dev```
+
+Open your web browser and navigate to 'http://localhost:3000' to view the web application. 
+
+You can access the interface to the database at 'localhost/phpmyadmin'
 
 
 
