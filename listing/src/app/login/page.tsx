@@ -12,13 +12,8 @@ export default  function Home() {
   const [loginStatus, setLoginStatus] = React.useState("");
 
   const register = (e) => {
-<<<<<<< Updated upstream
     e.preventDefault();
     Axios.post("http://localhost:3001/login", {
-=======
-   e.preventDefault();
-    Axios.post("http://localhost:3002/login", {
->>>>>>> Stashed changes
       username: username,
       password: password,
     }).then((response) => {
