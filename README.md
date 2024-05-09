@@ -5,12 +5,12 @@ CS 157A - Intro to Database Management
 The Shopping List Tracker App is a web application designed to help users create, manage, and track their shopping lists online. Users can easily create new shopping lists, add items with quantities, mark items as purchased, associate lists with shops, and add reviews for shops. The application provides a seamless and user-friendly experience for keeping track of shopping needs and preferences.
 
 #### Features
-User Authentication: Register new accounts and login securely.
-Lists Management: Create and view shopping lists stored in the database.
-Item Management: Add and view items within lists that are stored in the database. User can choose cateory and quantity of items to add to the list.
-Shop Integration: Associate lists with existing shops and view shop details including brands, products and reviews.
-Favorites: Add Shops to Favorites and view Favorite Shops.
-Reviews: Add and view reviews for Shops.
+- User Authentication: Register new accounts and login securely.
+- Lists Management: Create and view shopping lists stored in the database.
+- Item Management: Add and view items within lists that are stored in the database. User can choose cateory and quantity of items to add to the list.
+- Shop Integration: Associate lists with existing shops and view shop details including brands, products and reviews.
+- Favorites: Add Shops to Favorites and view Favorite Shops.
+- Reviews: Add and view reviews for Shops.
 
 #### Technologies Used
 - **Frontend:** React.js, Next.js, Tailwind CSS, TypeScript
