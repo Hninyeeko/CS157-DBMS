@@ -1,36 +1,69 @@
 "use client"
-
+import {useState, useEffect} from "react";
 import * as React from "react";
 import { useRouter } from "next/navigation"
 import Axios from "axios";
 
+// Define the Shop interface
+interface Shop {
+  ShopName: string;
+  ShopID: string;
+}
+
 export default function addReview(){
   const router = useRouter();
 
-  const [shopID, setShopID] = React.useState('') //dropdown
   const [comment, setComment] = React.useState('')
-  const [stars, setStars] = React.useState('N/A') //dropdown
+  const [rating, setRating] = React.useState('N/A') //dropdown
   const [isLoading, setIsLoading] = React.useState(false)
+
+  const [date, setDate] = React.useState('')
+
+  const [selectedShop, setSelectedShop] = useState('');
+  const [shops, setShops] = useState<Shop[]>([]);
+
+  //for dropdown list
+  const handleSelectChange = (event) => {
+    setSelectedShop(event.target.value);
+    console.log("selectedshop value is : ", selectedShop);
+  };
 
     // Sending a Post request to add new review to DB
     const addReview = (e) => {
       e.preventDefault();
       setIsLoading(true)
+      console.log('Selected Shop ID:', selectedShop);
       Axios.post("http://localhost:3002/addReview", {
+        //UserID: UserID,
         comment: comment,
-        stars: stars,
-        shopID: shopID,
+        rating: rating,
+        selectedShop: selectedShop,
+        date: date,
       }).then((response) => {
-        if(response.data.message) {
-          console.log(response.data.message)
           router.refresh()
           router.push('/viewShops')
-        } else {
-          console.log(response.data.email) 
-        }
+        
       }
       )
     }
+
+    //grabs shop list from API
+    useEffect(() => {
+    const getShopList = async () => {
+      try{
+        console.log("Frontend sending get request to API endpoint");
+        const response = await Axios.get<Shop[]>("http://localhost:3002/getShopList");
+        console.log("Response from backend:", response.data);
+        setShops(response.data);
+      }catch (error) {
+        console.error('Error fetching data', error);
+      }
+    };
+
+    getShopList();
+    }, []);
+
+    
 
   
   const handleCancel = () => {
@@ -43,15 +76,20 @@ export default function addReview(){
     <form onSubmit={addReview} className="flex flex-col items-center">
       <h1>Add Review</h1>
       <label>
-        <span>Shop ID</span>
-        <input
+        <span>Shop</span>
+        <select
         required
-        type="text"
-        placeholder="Shop ID"
-        onChange={(e) => setShopID(e.target.value)}
-        value={shopID}
-        className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
-      />
+        value={selectedShop} 
+        onChange={handleSelectChange}
+        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="">Select a shop.</option>
+          {shops.map((shop) => (
+            <option key={shop.ShopID} value={shop.ShopID}>
+              {shop.ShopName}
+           </option>
+          ))}
+        </select>
       </label>
       <label> 
         <span>Comment</span>
@@ -64,11 +102,12 @@ export default function addReview(){
         className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
       />
       </label>
+      
       <label>
         <span>Stars</span>
         <select
-          onChange={(e) => setStars(e.target.value)}
-          value={stars}
+          onChange={(e) => setRating(e.target.value)}
+          value={rating}
           className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
         >
           <option value="N/A">N/A</option>
@@ -78,6 +117,17 @@ export default function addReview(){
           <option value="4">4 stars</option>
           <option value="5">5 stars</option>
         </select>
+      </label>
+      <label> 
+        <span>Date</span>
+        <input
+        required
+        type="text"
+        placeholder="YYYY-MM-DD"
+        onChange={(e) => setDate(e.target.value)}
+        value={date}
+        className="pl-2.5 mb-5 w-4/5 h-10 border border-t border-r border-b border-l border-solid border-stone-300"
+      />
       </label>
 
       <div className="flex justify-between w-4/5">

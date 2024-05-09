@@ -22,8 +22,7 @@ export default function createNewList(){
       setIsLoading(true)
       Axios.post("http://localhost:3002/createNewList", {
         listName: listName,
-        shop: shop,
-        notes: notes,
+        shopID: shopID,
       }).then((response) => {
         if(response.data.message) {
           console.log(response.data.message)
@@ -76,7 +75,7 @@ export default function createNewList(){
         required
       />
       <label htmlFor="shop" className="sr-only">
-        Shop
+        Shop ID
       </label>
       <select
         required

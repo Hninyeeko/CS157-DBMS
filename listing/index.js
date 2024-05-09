@@ -96,16 +96,39 @@ app.post('/addItem', (req, res) =>{
 });
 
 app.post('/addReview', (req, res) =>{
-    const comment = req.body.comment;
-    const stars = req.body.stars;
-    const shopID = req.body.shopID;
+    const userID = storedUser.UserID;
+    console.log(storedUser);
+    console.log('this is UserId:', userID);
+    const { comment, rating, selectedShop, date} = req.body; // Destructure data from request body
+
     console.log('add review function started');
-    con.query('INSERT INTO reviews (Comment, Stars, ShopID) VALUES (?,?,?)', [comment, stars, shopID], (err, result) =>{
-        if(result){
-            res.send(result);
+    con.query('INSERT INTO Review (UserID, Comment, Rating, ShopID, Date) VALUES (?,?,?,?,?)', [userID, comment, rating, selectedShop, date], (err, result) =>{
+        if(err){
+            console.error('Error inserting review:', err);
+            res.status(500).json({ message: 'Failed to add review' }); // Send error response
         }
         else{
-            res.send({message: err});
+            console.log('Review added successfully');
+            res.status(200).json({ message: 'Review added successfully' }); // Send success response
+        }
+    });
+});
+
+app.post('/addFavShop', (req, res) =>{
+    const userID = storedUser.UserID;
+    console.log(storedUser);
+    console.log('this is UserId:', userID);
+    const { selectedShop} = req.body; // Destructure data from request body
+
+    console.log('add fav shop function started');
+    con.query('INSERT INTO Favorites (UserID, ShopID) VALUES (?,?)', [userID, selectedShop], (err, result) =>{
+        if(err){
+            console.error('Error inserting review:', err);
+            res.status(500).json({ message: 'Failed to add to Favorites' }); // Send error response
+        }
+        else{
+            console.log('Added to Favorites successfully');
+            res.status(200).json({ message: 'Added to Favorites successfully' }); // Send success response
         }
     });
 });
@@ -115,8 +138,8 @@ app.post('/register', (req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
-    console.log("register user");
-    con.query('INSERT INTO user (Email, Username, Password) VALUES (?, ?, ?)', [email, username, password], (err, result) => {
+
+    con.query('INSERT INTO User (Email, Username, Password) VALUES (?, ?, ?)', [email, username, password], (err, result) => {
         if(result) {
             res.send(result);
         }
@@ -130,7 +153,7 @@ app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
   
-    con.query('SELECT * FROM user where Username =? and Password =?', [username, password], (err, result) => {
+    con.query('SELECT * FROM User where Username =? and Password =?', [username, password], (err, result) => {
         if (err) {
             res.send({ err: err });
         } else {
@@ -164,75 +187,6 @@ app.post('/login', (req, res) => {
     });
 });
 
-app.get('/shops', async (req, res) => {
-    con.query('SELECT ShopName FROM shop',(err, result) => {
-        if (err) {
-            res.send({ err: err });
-        } else {
-            if (result.length > 0) {
-                const shops = result.map(item => item.ShopName);
-                
-                console.log(shops);
-
-                res.send(shops);
-                // You can send this data to multiple pages by storing it in a session or a cookie.
-                // Here's an example of using sessions to store the user data:
-
-            } else {
-                res.send({ message: 'no shops' });
-            }
-
-        }
-    });
-});
-
-app.get('/viewLists', async (req, res) => {
-    const userID1 = storedUser.UserID; 
-    con.query('SELECT * FROM list where UserID=?',[userID1],(err, result) => {
-        if (err) {
-            res.send({ err: err });
-        } else {
-            if (result.length > 0) {
-                console.log(result);
-                const lists = result;
-                
-                console.log(lists);
-
-                res.send(lists);
-                // You can send this data to multiple pages by storing it in a session or a cookie.
-                // Here's an example of using sessions to store the user data:
-
-            } else {
-                res.send({ message: 'no lists' });
-            }
-
-        }
-    });
-});
-
-app.get('/productNames', async (req, res) => {
-    console.log('get prod names query started');
-    con.query('SELECT ProductName FROM product',(err, result) => {
-        if (err) {
-            res.send({ err: err });
-        } else {
-            if (result.length > 0) {
-                const productNames = result.map(item => item.ProductName);
-                
-                console.log(productNames);
-
-                res.send(productNames);
-                // You can send this data to multiple pages by storing it in a session or a cookie.
-                // Here's an example of using sessions to store the user data:
-
-            } else {
-                res.send({ message: 'no products' });
-            }
-
-        }
-    });
-});
-
 app.get('/some-page', (req, res) => {
     if (storedUser) {
       // User is logged in
@@ -244,57 +198,6 @@ app.get('/some-page', (req, res) => {
       res.send({ message: 'You are not logged in' });
       console.log('User is not logged in');
     }
-  });
-
-  app.get('/shopName/:shopId', async (req, res) => {
-    const shopId = req.params.shopId;
-    con.query('SELECT ShopName FROM shop where ShopID=?',[shopId],(err, result) => {
-        console.log('query started');
-        if (err) {
-            res.send({ err: err });
-        } else {
-            if (result.length > 0) {
-                console.log(result);
-                const lists = result;
-                
-                console.log(lists);
-
-                res.send(lists);
-                // You can send this data to multiple pages by storing it in a session or a cookie.
-                // Here's an example of using sessions to store the user data:
-
-            } else {
-                res.send({ message: 'no lists' });
-            }
-
-        }
-    });
-  });
-
-  app.get('/getItems/:listID', async (req, res) => {
-    const listId = req.params.listID;
-    console.log('this is submitted listID:', listId);
-    con.query('SELECT * FROM item where ListID=?',[listId],(err, result) => {
-        console.log('query started');
-        if (err) {
-            res.send({ err: err });
-        } else {
-            if (result.length > 0) {
-                console.log(result);
-                const items = result;
-                
-                console.log(items);
-
-                res.send(items);
-                // You can send this data to multiple pages by storing it in a session or a cookie.
-                // Here's an example of using sessions to store the user data:
-
-            } else {
-                res.send({ message: 'no items' });
-            }
-
-        }
-    });
   });
 
 
@@ -349,3 +252,36 @@ async function executeSqlFile(filePath) {
       res.status(500).json({ error: 'An error occurred while executing the SQL file' });
     }
   });
+
+  app.get('/getShopList', async (req, res) => {
+    con.query('SELECT ShopName, ShopID FROM Shop', (err, result) => {
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                const shopList = result;
+                console.log("Shop data from backend:", shopList);
+                res.send(shopList);
+            }
+
+        }
+    });
+});
+
+app.get('/getFavShopList', async (req, res) => {
+    const userID = storedUser.UserID;
+    con.query('SELECT S.ShopName, F.ShopID FROM Favorites F, Shop S WHERE S.ShopID=F.ShopID && F.UserID=?', [userID], (err, result) => {
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                const favshopList = result;
+                console.log("Fav Shop data from backend:", favshopList);
+                res.send(favshopList);
+            }
+
+        }
+    });
+});
+
+
