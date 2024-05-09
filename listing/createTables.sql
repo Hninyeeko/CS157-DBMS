@@ -24,6 +24,7 @@ CREATE TABLE Brand (
 CREATE TABLE Product (
     ProductID INT AUTO_INCREMENT PRIMARY KEY,
     CategoryID INT NOT NULL,
+    BrandID INT NOT NULL,
     ProductName VARCHAR(255) NOT NULL,
     Description TEXT,
     FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID),
@@ -46,7 +47,7 @@ CREATE TABLE Item (
     ProductID INT NOT NULL,
     ItemName VARCHAR(225) NOT NULL,
     Quantity INT NOT NULL,
-    Description VARCHAR(225) NOT NULL,
+    Purchased BOOLEAN NOT NULL,
     FOREIGN KEY (ListID) REFERENCES List(ListID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
@@ -62,21 +63,7 @@ CREATE TABLE Review (
     FOREIGN KEY (ShopID) REFERENCES Shop(ShopID)
 );
 
-CREATE TABLE Favorites (
-    UserID INT NOT NULL,
-    ShopID INT NOT NULL,
-    PRIMARY KEY (UserID, ShopID),
-    FOREIGN KEY (UserID) REFERENCES user(UserID),
-    FOREIGN KEY (ShopID) REFERENCES shop(ShopID)
-);
 
-CREATE TABLE shopbrands (
-    BrandID INT,
-    ShopID INT,
-    PRIMARY KEY (BrandID, ShopID),
-    FOREIGN KEY (BrandID) REFERENCES brand(BrandID),
-    FOREIGN KEY (ShopID) REFERENCES shop(ShopID)
-);
 
 --insert statements needed for teacher and grader
 
