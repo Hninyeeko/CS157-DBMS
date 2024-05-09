@@ -11,6 +11,28 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
+
+
+
+  
   "author": "",
   "license": "ISC"
+    "@builder.io/dev-tools": "^1.0.10",
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-mysql-session": "^3.0.2",
+    "express-session": "^1.18.0",
+    "mdb-react-ui-kit": "^8.0.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.7",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.11",
+    "@types/react": "^18.3.1",
+    "typescript": "^5.4.5"
+  }
 }

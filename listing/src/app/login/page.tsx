@@ -13,7 +13,7 @@ export default  function Home() {
   const router = useRouter();
 
   const register = (e) => {
-    e.preventDefault();
+   e.preventDefault();
     Axios.post("http://localhost:3002/login", {
       username: username,
       password: password,
