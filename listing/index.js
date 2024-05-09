@@ -284,4 +284,124 @@ app.get('/getFavShopList', async (req, res) => {
     });
 });
 
+app.get('/shops', async (req, res) => {
+    con.query('SELECT ShopName FROM shop',(err, result) => {
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                const shops = result.map(item => item.ShopName);
+                
+                console.log(shops);
+
+                res.send(shops);
+                // You can send this data to multiple pages by storing it in a session or a cookie.
+                // Here's an example of using sessions to store the user data:
+
+            } else {
+                res.send({ message: 'no shops' });
+            }
+
+        }
+    });
+});
+
+app.get('/viewLists', async (req, res) => {
+    const userID1 = storedUser.UserID; 
+    con.query('SELECT * FROM list where UserID=?',[userID1],(err, result) => {
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                console.log(result);
+                const lists = result;
+                
+                console.log(lists);
+
+                res.send(lists);
+                // You can send this data to multiple pages by storing it in a session or a cookie.
+                // Here's an example of using sessions to store the user data:
+
+            } else {
+                res.send({ message: 'no lists' });
+            }
+
+        }
+    });
+});
+
+app.get('/productNames', async (req, res) => {
+    console.log('get prod names query started');
+    con.query('SELECT ProductName FROM product',(err, result) => {
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                const productNames = result.map(item => item.ProductName);
+                
+                console.log(productNames);
+
+                res.send(productNames);
+                // You can send this data to multiple pages by storing it in a session or a cookie.
+                // Here's an example of using sessions to store the user data:
+
+            } else {
+                res.send({ message: 'no products' });
+            }
+
+        }
+    });
+});
+
+app.get('/shopName/:shopId', async (req, res) => {
+    const shopId = req.params.shopId;
+    con.query('SELECT ShopName FROM shop where ShopID=?',[shopId],(err, result) => {
+        console.log('query started');
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                console.log(result);
+                const lists = result;
+                
+                console.log(lists);
+
+                res.send(lists);
+                // You can send this data to multiple pages by storing it in a session or a cookie.
+                // Here's an example of using sessions to store the user data:
+
+            } else {
+                res.send({ message: 'no lists' });
+            }
+
+        }
+    });
+  });
+
+  app.get('/getItems/:listID', async (req, res) => {
+    const listId = req.params.listID;
+    console.log('this is submitted listID:', listId);
+    con.query('SELECT * FROM item where ListID=?',[listId],(err, result) => {
+        console.log('query started');
+        if (err) {
+            res.send({ err: err });
+        } else {
+            if (result.length > 0) {
+                console.log(result);
+                const items = result;
+                
+                console.log(items);
+
+                res.send(items);
+                // You can send this data to multiple pages by storing it in a session or a cookie.
+                // Here's an example of using sessions to store the user data:
+
+            } else {
+                res.send({ message: 'no items' });
+            }
+
+        }
+    });
+  });
+
 
