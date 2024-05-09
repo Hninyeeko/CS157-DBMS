@@ -77,6 +77,7 @@ https://nodejs.org/en
 
 Download XAMPP and set Port number of MySQL to 3307 in Config file
 Run Apache and MySQL in XAMPP
+On Your Browser open localhost/phpmyadmin and on the sql tab run the createTables.sql file by copy and pasting the code onto the sql tab on php my admin it should create database and tables and fill it in with some starter data
 
 Run the Apache and MySQL Module concurrently 
 
