@@ -6,11 +6,11 @@ The Shopping List Tracker App is a web application designed to help users create
 
 #### Features
 User Authentication: Register new accounts and login securely.
-Lists Management: Create, view, update, and delete shopping lists.
-Item Management: Add, update, delete, and mark items as purchased within lists.
-Shop Integration: Associate lists with existing shops and view shop details.
-Reviews: Add, view, update, and delete reviews for shops.
-Search Lists: Search for existing lists by shop association.
+Lists Management: Create and view shopping lists from the database.
+Item Management: Add and view items within lists that are stored in the database.
+Shop Integration: Associate lists with existing shops and view shop details including brands and products.
+Favorites: Add Shops to Favorites and view Favorite Shops.
+Reviews: Add and view reviews for Shops.
 
 #### Technologies Used
 - **Frontend:** React.js, Next.js, Tailwind CSS, TypeScript
@@ -25,7 +25,7 @@ Search Lists: Search for existing lists by shop association.
 * Paing Hein Kyaw
 * Aye Thwe Tun
 
-## Division of Labor**
+## Division of Work
 Kunal Pradhan
 - Full Stack Dev
 - Set Up Database
@@ -56,12 +56,12 @@ Task List
 - [ ] Task 3: ReadMe file (how to set up project, division of work)
 - [ ] Task 4: Project demo video
 - [ ] Task 5: Presentation Slides (for the video)
-- [ ] Task 6: Meeting Minutes in GitHub
+- [x] Task 6: Meeting Minutes in GitHub
 - [ ] Task 7: Project Report Doc
     - [x] Create ER Data Model (10 relations)
     - [ ] Database Design Diagram (tables and relationships, BCNF)
     - [ ] Major Design decisions
-    - [ ] Implementation details UML diagram
+    - [ ] Implementation details (UML diagram)
     - [ ] Snapshots of system run for project report
     - [ ] Conclusions/lessons learned
     - [x] Goals/Functional Reqs 
