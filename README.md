@@ -25,7 +25,7 @@ Search Lists: Search for existing lists by shop association.
 * Paing Hein Kyaw
 * Aye Thwe Tun
 
-**Division of Labor**
+## Division of Labor**
 Kunal Pradhan
 - Full Stack Dev
 - Set Up Database
@@ -46,7 +46,7 @@ Aye Thwe Tun
 - DB Design - ER Diagram
 - Presentation Slides
 - Code Documentation and Cleanup
-- README.md
+- README.md, Meeting Minutes
 
     
 Task List
