@@ -11,6 +11,11 @@ interface ListFormProps {
   onCancel: () => void;
 }
 
+/**
+ * Form component for adding a new item to a shopping list.
+ * Provides input fields for item name, product specification, quantity, and description.
+ * Sends a POST request to the backend to add the new item to the database.
+ */
 const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
   const router = useRouter();
   const [itemName, setItemName] = React.useState("");
@@ -151,6 +156,10 @@ const ListForm: React.FC<ListFormProps> = ({ onSubmit, onCancel }) => {
   );
 };
 
+/**
+ * Main component that renders the ListForm.
+ * Handles form submission and cancellation logic.
+ */
 export default function App() {
   const handleSubmit = (itemName: string, quantity: string) => {
     console.log("Item Name:", itemName);
