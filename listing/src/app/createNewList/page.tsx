@@ -6,6 +6,12 @@ import Axios from "axios";
 import React, { useEffect, useState } from 'react';
 
 
+
+/**
+ * Component for creating a new list.
+ * Allows users to input list name, select a shop, and add notes.
+ * Sends a POST request to the backend to add the new list to the database.
+ */
 export default function createNewList(){
   const router = useRouter();
 

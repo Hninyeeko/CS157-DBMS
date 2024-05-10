@@ -11,6 +11,11 @@ interface Shop {
   ShopID: string;
 }
 
+/**
+ * Component for adding a shop to favorites.
+ * Fetches the list of shops from the backend API and provides a dropdown to select a shop.
+ * Sends a POST request to add the selected shop to the user's favorites.
+ */
 export default function addFavShop(){
     const router = useRouter();
   

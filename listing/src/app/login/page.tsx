@@ -5,6 +5,12 @@ import Image from "next/image";
 import {useRouter} from "next/navigation";
 import { setSyntheticLeadingComments } from "typescript";
 
+// This component represents a login form where users can input their username and password to log in.
+// It uses useState and useEffect hooks to manage state and perform side effects respectively.
+// The login function sends a POST request to the server with the provided username and password, 
+// and updates the loginStatus state based on the response.
+// If the login is successful, the user is redirected to the home page.
+// If loginStatus is empty, the login form is displayed, otherwise, the login status is displayed.
 
 export default  function Home() {
   const [username, setUsername] = React.useState("");

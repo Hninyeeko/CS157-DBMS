@@ -1,3 +1,9 @@
+// This component displays a list of shopping lists retrieved from the server.
+// It fetches the lists and their corresponding shop names from the server using Axios.
+// Each list item is displayed with its name, shop name, and notes.
+// Clicking on a list item redirects the user to the list template page with the list ID and name as query parameters.
+// It also provides a cancel button to return to the home page.
+
 "use client"
 
 import * as React from "react";

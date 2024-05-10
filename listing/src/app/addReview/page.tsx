@@ -10,6 +10,11 @@ interface Shop {
   ShopID: string;
 }
 
+/**
+ * Component for adding a new review for a shop.
+ * Allows users to select a shop, provide a comment, rating, and date for the review.
+ * Sends a POST request to the backend to add the new review to the database.
+ */
 export default function addReview(){
   const router = useRouter();
 

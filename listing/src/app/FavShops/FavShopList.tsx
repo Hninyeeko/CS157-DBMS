@@ -6,6 +6,10 @@ interface FavShop {
     ShopName: string;
     ShopID: string;
   }
+/**
+ * Component to display a list of favorite shops.
+ * Fetches the list of favorite shops from the server upon mounting.
+ */
 export default function ShopList() {
 
     const [favshops, setShops] = useState<FavShop[]>([]);
