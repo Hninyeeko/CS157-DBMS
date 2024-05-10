@@ -67,6 +67,20 @@ CREATE TABLE Review (
     FOREIGN KEY (ShopID) REFERENCES Shop(ShopID)
 );
 
+CREATE TABLE shopbrands (
+    BrandID INT,
+    ShopID INT,
+    PRIMARY KEY (BrandID, ShopID),
+    FOREIGN KEY (BrandID) REFERENCES Brand(BrandID),
+    FOREIGN KEY (ShopID) REFERENCES Shop(ShopID)
+);
+
+CREATE TABLE Favorites (
+    UserID INT NOT NULL,
+    ShopID INT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    FOREIGN KEY (ShopID) REFERENCES Shop(ShopID)
+);
 
 
 --insert statements needed for teacher and grader
