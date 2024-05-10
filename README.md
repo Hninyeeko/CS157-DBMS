@@ -1,10 +1,10 @@
 # Cartier Shopping List Web App 
 CS 157A - Intro to Database Management
 
-### Overview
+## Overview
 The Shopping List Tracker App is a web application designed to help users create, manage, and track their shopping lists online. Users can easily create new shopping lists, add items with quantities, mark items as purchased, associate lists with shops, and add reviews for shops. The application provides a seamless and user-friendly experience for keeping track of shopping needs and preferences.
 
-#### Features
+## Features
 - User Authentication: Register new accounts and login securely.
 - Lists Management: Create and view shopping lists stored in the database.
 - Item Management: Add and view items within lists that are stored in the database. User can choose cateory and quantity of items to add to the list.
@@ -12,7 +12,7 @@ The Shopping List Tracker App is a web application designed to help users create
 - Favorites: Add Shops to Favorites and view Favorite Shops.
 - Reviews: Add and view reviews for Shops.
 
-#### Technologies Used
+## Technologies Used
 - **Frontend:** React.js, Next.js, Tailwind CSS, TypeScript
 - **Backend:** Node.js, Express.js
 - **Database:** MySQL, XAMPP, PhPmyadmin
@@ -89,17 +89,17 @@ Install Dependencies from the root of the file:
 
 **How to run the project**
 
-Change directory into the listing folder. 
+1. Change directory into the listing folder. 
 
 ```cd listing```
 
-Run the project using the following command 
+2. Run the project using the following command 
 
 ```npm run dev```
 
-Open your web browser and navigate to 'http://localhost:3000' to view the web application. 
+3. Open your web browser and navigate to 'http://localhost:3000' to view the web application. 
 
-You can access the interface to the database at 'localhost/phpmyadmin'
+4. You can access the interface to the database at 'localhost/phpmyadmin'
 
 
 
