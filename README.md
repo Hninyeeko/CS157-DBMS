@@ -87,7 +87,7 @@ Install Dependencies from the root of the file:
 
 ``` npm install nex --save-dev ```
 
-**How to run the project**
+### How to run the project
 
 1. Change directory into the listing folder. 
 
